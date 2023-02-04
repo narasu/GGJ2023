@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 1904146894196439968}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.297083, y: -11.609536, z: 0.85656774}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 153.89, y: 153.89, z: 153.89}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -112,7 +112,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemy: {fileID: -4084314113228967062}
-  Player: {fileID: 0}
 --- !u!195 &-4084314113228967062
 NavMeshAgent:
   m_ObjectHideFlags: 0
