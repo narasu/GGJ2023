@@ -21,7 +21,7 @@ public class waveSpawner : MonoBehaviour
     public Transform[] spawnpoint;
     private Wave CurrentWave;
     public Animator animator;
-    public TextMeshPro waveName;
+    public TextMeshProUGUI waveName;
     private int CurrentWaveNumber=0; //will help us know what wave we are in
 
     private bool canSpawn = true;
