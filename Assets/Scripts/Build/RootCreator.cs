@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,17 +6,56 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class RootCreator : MonoBehaviour
 {
-    LineRenderer lineRenderer;
-    public LayerMask mask;
-    public GameObject rootPrefab;
-    int currentNode;
 
-    List<GameObject> rootList = new List<GameObject>();
+    [HideInInspector] public LineRenderer lineRenderer;
+    public LayerMask rootSpawnArea;
+    public LayerMask playingField;
+    public GameObject rootPrefab;
+    public Transform tree;
+
+    public float pRootPoints
+    {
+        get
+        {
+            return rootPoints;
+        }
+
+        set
+        {
+            rootPoints = value;
+
+            SetMaxLength();
+        }
+    }
+    private float rootPoints;
+
+    [HideInInspector] public float maxLength = 5f;
+
+    private void SetMaxLength()
+    {
+        maxLength = Mathf.Floor(rootPoints / 10);
+    }
+
+
+
+    FSM<RootCreator> fsm;
+
+    public List<GameObject> rootList = new List<GameObject>();
+    private void Awake()
+    {
+        lineRenderer = GetComponent<LineRenderer>();
+
+        fsm = new FSM<RootCreator>();
+        fsm.Initialize(this);
+        fsm.AddState(new RootEmptyState(fsm));
+        fsm.AddState(new RootEditState(fsm));
+
+        fsm.SwitchState(typeof(RootEmptyState));
+    }
+
 
     void Start()
     {
-        lineRenderer = GetComponent<LineRenderer>();
-        currentNode = 0;
         
 
 
@@ -24,23 +64,7 @@ public class RootCreator : MonoBehaviour
 
     void Update()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
-        {
-            if (hit.collider.CompareTag("PlayingField"))
-            {
-                lineRenderer.SetPosition(1, ray.GetPoint(hit.distance));
-                if (Input.GetMouseButtonDown(0))
-                {
-                    GameObject root = PlaceRoot();
-                    rootList.Add(root);
-                    lineRenderer.SetPosition(0, ray.GetPoint(hit.distance));
-                    currentNode++;
-                }
-            }
-        }
+        fsm.Update();
 
         //if (Input.GetMouseButtonDown(0))
         //{
@@ -56,6 +80,7 @@ public class RootCreator : MonoBehaviour
         //        }
         //    }
         //}
+
     }
 
     void StartLine(Vector3 _startingPoint)
@@ -63,7 +88,7 @@ public class RootCreator : MonoBehaviour
 
     }
 
-    GameObject PlaceRoot()
+    public GameObject PlaceRoot()
     {
         GameObject newRoot = Instantiate(rootPrefab);
         Vector3 p1 = lineRenderer.GetPosition(0);
@@ -79,4 +104,5 @@ public class RootCreator : MonoBehaviour
 
         return newRoot;
     }
+
 }
