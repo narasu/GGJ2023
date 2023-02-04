@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -1733514864808443752}
   - component: {fileID: -4084314113228967062}
   - component: {fileID: 3725863310322853565}
+  - component: {fileID: 5713635395455680096}
   - component: {fileID: -3747096445301048484}
   m_Layer: 0
   m_Name: Cube
@@ -149,7 +150,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxEnemyHealth: 20
-  currentEnemyHealth: 0
+  currentEnemyHealth: 20
+--- !u!114 &5713635395455680096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904146894196439968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bf22fc278e36f64aba16a13ccba5910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyDamage: 1
 --- !u!54 &-3747096445301048484
 Rigidbody:
   m_ObjectHideFlags: 0

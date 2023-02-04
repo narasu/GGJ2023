@@ -11,7 +11,7 @@ public class Obstacledamage : MonoBehaviour
         {
             var healthComponent = other.collider.GetComponent<EnemyHealth>(); //reference to enemy health script.
             healthComponent.EnemyTakeDamge(ObstacleDamage); //do damage
-            Destroy(this);//destroy the bullet
+            Destroy(healthComponent.gameObject);//destroy the bullet
         }
     }
 }
