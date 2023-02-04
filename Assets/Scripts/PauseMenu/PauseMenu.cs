@@ -5,8 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    public static PauseMenu Instance;
+    public Animator DayCycle;
     public GameObject Menu;
+    public GameObject EndTurnButton;
     public static bool IsPaused = false;
+
+    void Awake() => Instance = this;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +34,6 @@ public class PauseMenu : MonoBehaviour
                 PauseGame();
             }
         }
-
     }
 
     public void PauseGame()
@@ -56,5 +60,18 @@ public class PauseMenu : MonoBehaviour
     {
         //kan niet getest worden in unity
         Application.Quit();
+    }
+
+    public void EndNight()
+    {
+        global::DayCycle.Instance.isNight = false;
+        //EndTurnButton.SetActive(false);
+        DayCycle.SetFloat("DayNightCycle", 1);
+    }
+
+    public void StartNight()
+    {
+        global::DayCycle.Instance.isNight = true;
+        //animatie om nacht te starten staat in waveSpawner.cs
     }
 }
