@@ -5,12 +5,17 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
+    public static EnemyController Instance;
     public NavMeshAgent Enemy;
-    public Transform Player;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        Enemy.SetDestination(Player.position);
+        Enemy.SetDestination(PlayerController.Instance.Player.position);
     }
 }
