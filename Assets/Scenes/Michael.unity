@@ -620,6 +620,8 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 0
+  rootPrefab: {fileID: 5283760663654909237, guid: 2ac9106d3fb69f344ab75e5602c57395,
+    type: 3}
 --- !u!1 &1117414443
 GameObject:
   m_ObjectHideFlags: 0

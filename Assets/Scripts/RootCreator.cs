@@ -7,14 +7,15 @@ public class RootCreator : MonoBehaviour
 {
     LineRenderer lineRenderer;
     public LayerMask mask;
+    public GameObject rootPrefab;
     int currentNode;
 
-    List<GameObject> cylinderList = new List<GameObject>();
+    List<GameObject> rootList = new List<GameObject>();
 
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        currentNode = 1;
+        currentNode = 0;
         
 
 
@@ -34,7 +35,7 @@ public class RootCreator : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     GameObject root = PlaceRoot();
-                    cylinderList.Add(root);
+                    rootList.Add(root);
                     lineRenderer.SetPosition(0, ray.GetPoint(hit.distance));
                     currentNode++;
                 }
@@ -64,17 +65,18 @@ public class RootCreator : MonoBehaviour
 
     GameObject PlaceRoot()
     {
-        GameObject newCylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+        GameObject newRoot = Instantiate(rootPrefab);
         Vector3 p1 = lineRenderer.GetPosition(0);
         Vector3 p2 = lineRenderer.GetPosition(1);
         Vector3 delta = p2 - p1;
-        newCylinder.transform.rotation = Quaternion.LookRotation(delta);
-        newCylinder.transform.Rotate(-90, 0, 0);
-        newCylinder.transform.position = (p1 + p2) / 2f;
-        Vector3 scale = newCylinder.transform.localScale;
-        scale.y = delta.magnitude / 2f;
-        newCylinder.transform.localScale = scale;
 
-        return newCylinder;
+        newRoot.transform.rotation = Quaternion.LookRotation(delta);
+        newRoot.transform.Rotate(-90, 0, 0);
+        newRoot.transform.position = (p1 + p2) / 2f;
+        Vector3 scale = newRoot.transform.localScale;
+        scale.y = delta.magnitude / 2f;
+        newRoot.transform.localScale = scale;
+
+        return newRoot;
     }
 }
