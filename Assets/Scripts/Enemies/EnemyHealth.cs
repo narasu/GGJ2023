@@ -8,10 +8,12 @@ public class EnemyHealth : MonoBehaviour
     public float MaxEnemyHealth;
     public float currentEnemyHealth;
 
-    void awake()
+    void Awake()
     {
         currentEnemyHealth = MaxEnemyHealth; //make sure the current health is set to the max
         Instance = this;
+
+        StartCoroutine(DamagePerSecond());
     }
 
 
@@ -23,6 +25,16 @@ public class EnemyHealth : MonoBehaviour
         {
             Die();
         }
+    }
+
+    private IEnumerator DamagePerSecond()
+    {
+        while (currentEnemyHealth > 0)
+        {
+            EnemyTakeDamge(10);
+            yield return new WaitForSeconds(1.0f);
+        }
+        
     }
 
     void Die()
