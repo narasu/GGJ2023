@@ -32,7 +32,7 @@ public class waveSpawner : MonoBehaviour
 
     private void Awake()
     {
-        CurrentWaveNumber = 0;
+        CurrentWaveNumber = -1;
         Instance = this;
     }
     void Update()

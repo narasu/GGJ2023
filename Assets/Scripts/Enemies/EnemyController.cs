@@ -6,11 +6,15 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
     public static EnemyController Instance;
-    public NavMeshAgent Enemy;
+    NavMeshAgent Enemy;
+    [SerializeField] private float Speed = 10;
+    public EnemyHealth EnemyHealth;
 
     private void Awake()
     {
         Instance = this;
+        Enemy = GetComponent<NavMeshAgent>();
+        Enemy.speed = Speed;
     }
 
     // Update is called once per frame

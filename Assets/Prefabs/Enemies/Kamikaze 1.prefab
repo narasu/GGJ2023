@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 5713635395455680096}
   - component: {fileID: -3747096445301048484}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Kamikaze 1
   m_TagString: Enemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b092d080d566c5c4193fc1c80e22f861, type: 2}
+  - {fileID: 2100000, guid: d945c681c4504df439962c1a6f33d8af, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -114,7 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 535b8dcba529c4c40a33a98c66972e0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemy: {fileID: -4084314113228967062}
+  Speed: 30
+  EnemyHealth: {fileID: 3725863310322853565}
 --- !u!195 &-4084314113228967062
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -149,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed4a25831216a14aa7ca8e8f1ac2b4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxEnemyHealth: 20
+  MaxEnemyHealth: 100
   currentEnemyHealth: 20
 --- !u!114 &5713635395455680096
 MonoBehaviour:
@@ -163,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf22fc278e36f64aba16a13ccba5910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyDamage: 1
+  EnemyDamage: 150
 --- !u!54 &-3747096445301048484
 Rigidbody:
   m_ObjectHideFlags: 0
