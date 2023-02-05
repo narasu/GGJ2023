@@ -30,7 +30,12 @@ public class RootCreator : MonoBehaviour
             SetMaxLength();
         }
     }
-    public float rootPoints = 50f;
+
+    [SerializeField]
+    private float rootPoints = 50f;
+
+    [SerializeField][Range(0, 25)]
+    private float pointsToRootLengthDivider = 10f;
 
     [HideInInspector] public float maxLength;
 
