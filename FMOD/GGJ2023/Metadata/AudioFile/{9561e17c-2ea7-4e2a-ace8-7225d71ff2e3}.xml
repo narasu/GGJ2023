@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{9561e17c-2ea7-4e2a-ace8-7225d71ff2e3}">
+		<property name="assetPath">
+			<value>Wood, Impact, Fist Hit Hollow Wall, Loose 03 SND30377.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.82625000000000004</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{8a5edba4-144c-42e7-8442-0d26ba1b56f6}</destination>
+		</relationship>
+	</object>
+</objects>

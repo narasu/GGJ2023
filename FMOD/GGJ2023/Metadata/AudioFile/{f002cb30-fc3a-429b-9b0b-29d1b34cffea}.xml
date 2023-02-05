@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{f002cb30-fc3a-429b-9b0b-29d1b34cffea}">
+		<property name="assetPath">
+			<value>Vehicles, Truck Van &amp; Suv, Van, Idle, Exterior, Front, Loop 02 SND62001.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>23.132229166666665</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{8a5edba4-144c-42e7-8442-0d26ba1b56f6}</destination>
+		</relationship>
+	</object>
+</objects>
