@@ -72,7 +72,7 @@ public class RootCreator : MonoBehaviour
 
     private void SetMaxLength()
     {
-        maxLength = Mathf.Floor(rootPoints / 10);
+        maxLength = Mathf.Floor(rootPoints / pointsToRootLengthDivider);
     }
 
     public GameObject PlaceRoot()
