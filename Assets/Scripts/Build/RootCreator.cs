@@ -54,8 +54,9 @@ public class RootCreator : MonoBehaviour
         fsm.Initialize(this);
         fsm.AddState(new RootEmptyState(fsm));
         fsm.AddState(new RootEditState(fsm));
+        fsm.AddState(new RootFightState(fsm));
 
-        
+
         fsm.SwitchState(typeof(RootEmptyState));
     }
 
@@ -72,7 +73,7 @@ public class RootCreator : MonoBehaviour
 
     private void SetMaxLength()
     {
-        maxLength = Mathf.Floor(rootPoints / 10);
+        maxLength = Mathf.Floor(rootPoints / pointsToRootLengthDivider);
     }
 
     public GameObject PlaceRoot()
