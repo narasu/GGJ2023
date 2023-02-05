@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="EventFolder" id="{3fdc216b-f1bf-4377-8733-d255dbe355ce}">
+		<property name="name">
+			<value>towers_speler</value>
+		</property>
+		<relationship name="folder">
+			<destination>{4f8c7757-f39b-4fb4-a6c2-8a83f23181b5}</destination>
+		</relationship>
+	</object>
+</objects>

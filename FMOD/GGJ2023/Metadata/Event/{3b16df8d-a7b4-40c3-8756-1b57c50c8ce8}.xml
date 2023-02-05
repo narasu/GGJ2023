@@ -32,6 +32,9 @@
 		<relationship name="timeline">
 			<destination>{7d146f7b-c448-4d0e-ae71-fdff9d22e9d4}</destination>
 		</relationship>
+		<relationship name="banks">
+			<destination>{2066f7b5-6a3c-4bf0-a6ff-958148ec13d6}</destination>
+		</relationship>
 	</object>
 	<object class="EventMixer" id="{cb12092b-5737-4650-b3c9-86896ca644a9}">
 		<relationship name="masterBus">
@@ -152,14 +155,11 @@
 		<property name="volume">
 			<value>-2.5</value>
 		</property>
-		<property name="totalSounds">
-			<value>3</value>
-		</property>
 		<property name="minimumTimeBetweenSounds">
 			<value>2000</value>
 		</property>
 		<property name="maximumTimeBetweenSounds">
-			<value>7000</value>
+			<value>5000</value>
 		</property>
 		<property name="spawnRate">
 			<value>90</value>
@@ -315,10 +315,10 @@
 	</object>
 	<object class="MultibandEqEffect" id="{f876316b-934d-45fa-948b-c82a7913564b}">
 		<property name="frequencyA">
-			<value>550.48114</value>
+			<value>2252.2688</value>
 		</property>
 		<property name="qualityA">
-			<value>0.434896529</value>
+			<value>0.372103453</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{5f9f82d7-5345-432e-9545-0bcbd23a43fa}" />
