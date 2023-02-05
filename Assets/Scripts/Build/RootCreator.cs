@@ -54,8 +54,9 @@ public class RootCreator : MonoBehaviour
         fsm.Initialize(this);
         fsm.AddState(new RootEmptyState(fsm));
         fsm.AddState(new RootEditState(fsm));
+        fsm.AddState(new RootFightState(fsm));
 
-        
+
         fsm.SwitchState(typeof(RootEmptyState));
     }
 
