@@ -6,12 +6,10 @@ public class RootEmptyState : State<RootCreator>
 {
     protected FSM<RootCreator> owner;
     LineRenderer lineRenderer;
-    Transform tree;
     public RootEmptyState(FSM<RootCreator> _owner)
     {
         owner = _owner;
         lineRenderer = owner.pOwner.lineRenderer;
-        tree = owner.pOwner.tree;
     }
 
     public override void OnEnter()
@@ -26,12 +24,13 @@ public class RootEmptyState : State<RootCreator>
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 100f, owner.pOwner.playingField))
+        if (Physics.Raycast(ray, out hit, 100f, owner.pOwner.rootSpawnArea))
         {
-            if (Input.GetMouseButtonDown(0) && Vector3.Distance(ray.GetPoint(hit.distance), tree.position) < 5f)
+            if (Input.GetMouseButtonDown(0))
             {
                 lineRenderer.positionCount = 2;
-                lineRenderer.SetPosition(0, ray.GetPoint(hit.distance));
+                Vector3 spawnPoint = new Vector3(ray.GetPoint(hit.distance).x, 0f, ray.GetPoint(hit.distance).z);
+                lineRenderer.SetPosition(0, spawnPoint);
                 owner.SwitchState(typeof(RootEditState));
             }
 
@@ -43,19 +42,18 @@ public class RootEditState : State<RootCreator>
 {
     protected FSM<RootCreator> owner;
     LineRenderer lineRenderer;
-    Transform tree;
+
+    bool canPlace;
 
     public RootEditState(FSM<RootCreator> _owner)
     {
         owner = _owner;
         lineRenderer = owner.pOwner.lineRenderer;
-        tree = owner.pOwner.tree;
     }
 
     public override void OnEnter()
     {
         base.OnEnter();
-        Debug.Log(owner.pOwner.maxLength);
     }
 
     public override void OnUpdate()
@@ -67,11 +65,27 @@ public class RootEditState : State<RootCreator>
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 100f, owner.pOwner.playingField))
         {
-
             Vector3 p1 = lineRenderer.GetPosition(0);
             Vector3 p2 = ray.GetPoint(hit.distance);
             Vector3 dir = (p2 - p1).normalized;
-            //Debug.Log((p2 - p1).magnitude);
+
+            lineRenderer.sharedMaterial = owner.pOwner.lineMaterials[0];
+            canPlace = true;
+
+            RaycastHit obstacleHit;
+            if (Physics.Raycast(ray, out obstacleHit, 100f, owner.pOwner.obstacle))
+            {
+                //Debug.Log(obstacleHit.collider.gameObject);
+                lineRenderer.sharedMaterial = owner.pOwner.lineMaterials[1];
+                canPlace = false;
+            }
+            if (Physics.Raycast(p1, dir, (p2-p1).magnitude, owner.pOwner.obstacle))
+            {
+                lineRenderer.sharedMaterial = owner.pOwner.lineMaterials[1];
+                canPlace = false;
+            }
+
+
 
             if ((p2 - p1).magnitude > owner.pOwner.maxLength)
             {
@@ -84,11 +98,10 @@ public class RootEditState : State<RootCreator>
                 lineRenderer.SetPosition(1, ray.GetPoint(hit.distance));
             }
             
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && canPlace)
             {
                 GameObject root = owner.pOwner.PlaceRoot();
                 owner.pOwner.rootList.Add(root);
-
                 if (Input.GetKey(KeyCode.LeftControl))
                 {
                     lineRenderer.SetPosition(0, ray.GetPoint(hit.distance));
@@ -97,8 +110,10 @@ public class RootEditState : State<RootCreator>
                 {
                     owner.SwitchState(typeof(RootEmptyState));
                 }
+
             }
 
         }
+
     }
 }

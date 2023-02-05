@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4014313509294268586}
   - component: {fileID: 5571068165495173476}
   - component: {fileID: 6150508634522470709}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,3 +111,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c857c32d2616be4d8f105884a0841a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meshList: []
