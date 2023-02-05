@@ -23,7 +23,7 @@ public class RootEmptyState : State<RootCreator>
 
         if (!DayCycle.Instance.isNight)
         {
-            Debug.Log("daytime has arrived");
+            
             owner.SwitchState(typeof(RootFightState));
         }
 
@@ -142,14 +142,15 @@ public class RootFightState : State<RootCreator>
 
     public override void OnEnter()
     {
+        Debug.Log("daytime has arrived");
     }
 
     public override void OnUpdate()
     {
-        base.OnUpdate();
 
         if (DayCycle.Instance.isNight)
         {
+            Debug.Log("night comes");
             owner.SwitchState(typeof(RootEmptyState));
         }
 
