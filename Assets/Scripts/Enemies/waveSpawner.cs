@@ -20,9 +20,9 @@ public class waveSpawner : MonoBehaviour
     public Wave[] wave;
     public Transform[] spawnpoint;
     private Wave CurrentWave;
-    public Animator animator;
+    public Animator Animator;
     public TextMeshProUGUI waveName;
-    private int CurrentWaveNumber=0; //will help us know what wave we are in
+    private int CurrentWaveNumber = 0; //will help us know what wave we are in
 
     private bool canSpawn = true;
     private bool canAnimate = false;
@@ -30,30 +30,40 @@ public class waveSpawner : MonoBehaviour
     void Update()
     {
         CurrentWave = wave[CurrentWaveNumber]; //if currentwavenr is 0 wave 1 is active and so on
-        spawnWave(); //spawn a wave
-        GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Enemies");
-        if (totalEnemies.Length == 0)
+        if (!DayCycle.Instance.isNight)
         {
+            spawnWave(); //spawn a wave
+        }
+        GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Enemies");
+        if (totalEnemies.Length == 0 && !DayCycle.Instance.isNight)
+        {
+            print("test");
             if (CurrentWaveNumber + 1 != wave.Length)
             {
                 if (canAnimate)
                 {
                     waveName.text = wave[CurrentWaveNumber + 1].waveName;
-                    animator.SetTrigger("WaveComplete");
+                    Animator.SetTrigger("WaveComplete");
                     canAnimate = false;
                 }
-            } else {
-                Debug.Log("End Of the Game");
-                animator.SetBool("Win", true);
             }
+            else
+            {
+                Debug.Log("End Of the Game");
+                Animator.SetBool("Win", true);
+            }
+        }
+        if (totalEnemies.Length == 0){
+            PauseMenu.Instance.DayCycle.SetFloat("DayNightCycle", -1);
         }
     }
 
-     void spawnNextWave()
-     {
-         CurrentWaveNumber++;
-         canSpawn = true;
-     }
+    void spawnNextWave()
+    {
+        CurrentWaveNumber++;
+        canSpawn = true;
+    }
+
     void spawnWave()
     {
         //only spawn an enemy if canspawn is true
@@ -70,6 +80,9 @@ public class waveSpawner : MonoBehaviour
                 //stop spawning if there's no more enemies in the list
                 canSpawn = false;
                 canAnimate = true;
+                //start daycycle animatie
+                DayCycle.Instance.isNight = true;
+                DayCycle.Instance.Night();
             }
         }
     }
