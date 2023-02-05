@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{8f3743ad-5c2b-45c7-ac75-5932d8db8046}">
+		<property name="name">
+			<value>day_night_switch</value>
+		</property>
+		<relationship name="folder">
+			<destination>{522e04a7-18b4-4b18-8b2c-6a636bf7a5fd}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{55285b75-f312-40d1-aca4-eee02e561ce8}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{55285b75-f312-40d1-aca4-eee02e561ce8}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

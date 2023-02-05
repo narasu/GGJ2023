@@ -37,10 +37,10 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _alphaclip: 0.987
-    - _grow: 1
+    - _alphaclip: 0.98
+    - _grow: 1.0001867
     - _metallic: 0
-    - _scale: -12.27
+    - _scale: 0
     - _smoothness: 0
     m_Colors:
     - _Color: {r: 0.5377358, g: 0.23851255, b: 0.11921501, a: 0}

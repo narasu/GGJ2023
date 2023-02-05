@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [RequireComponent(typeof(LineRenderer))]
 public class RootCreator : MonoBehaviour
@@ -13,33 +14,27 @@ public class RootCreator : MonoBehaviour
     public LayerMask playingField;
     public LayerMask obstacle;
     public GameObject rootPrefab;
+    //sound vars
+    public FMODUnity.StudioEventEmitter bgMusic;
+    public FMODUnity.StudioEventEmitter place_root;
+    public FMODUnity.StudioEventEmitter getting_day;
+    public FMODUnity.StudioEventEmitter getting_night;
+    public FMODUnity.StudioEventEmitter day_amb;
+    public FMODUnity.StudioEventEmitter night_amb;
 
-    [HideInInspector] public GameObject currentNode;
+    public TMP_Text pointText;
 
-    public float pRootPoints
-    {
-        get
-        {
-            return rootPoints;
-        }
+    [Min(0)]
+    public int rootPoints = 50;
 
-        set
-        {
-            rootPoints = value;
+    [Min(0)]
+    public float maxLengthPerRoot = 25f;
 
-            SetMaxLength();
-        }
-    }
+    [Min(0)]
+    public int rootPointCost = 10;
 
-    [SerializeField]
-    private float rootPoints = 50f;
-
-    [SerializeField][Range(0, 25)]
-    private float pointsToRootLengthDivider = 10f;
-
-    [HideInInspector] public float maxLength;
-
-
+    [Min(0)]
+    public int rootPointIncreasePerRound = 20;
 
 
     FSM<RootCreator> fsm;
@@ -48,7 +43,6 @@ public class RootCreator : MonoBehaviour
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        SetMaxLength();
 
         fsm = new FSM<RootCreator>();
         fsm.Initialize(this);
@@ -63,19 +57,16 @@ public class RootCreator : MonoBehaviour
 
     void Start()
     {
+        
     }
 
     void Update()
     {
         fsm.Update();
-
+        pointText.text = "RP: " + rootPoints.ToString();
     }
 
-    private void SetMaxLength()
-    {
-        maxLength = Mathf.Floor(rootPoints / pointsToRootLengthDivider);
-    }
-
+    
     public GameObject PlaceRoot()
     {
         GameObject newRoot = Instantiate(rootPrefab);
@@ -89,6 +80,8 @@ public class RootCreator : MonoBehaviour
         Vector3 scale = newRoot.transform.localScale;
         scale.y = delta.magnitude / 2f;
         newRoot.transform.localScale = scale;
+
+        rootPoints -= rootPointCost;
 
         return newRoot;
     }
