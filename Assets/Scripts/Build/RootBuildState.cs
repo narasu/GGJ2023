@@ -21,6 +21,12 @@ public class RootEmptyState : State<RootCreator>
     {
         base.OnUpdate();
 
+        if (!DayCycle.Instance.isNight)
+        {
+            
+            owner.SwitchState(typeof(RootFightState));
+        }
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
@@ -63,11 +69,16 @@ public class RootEditState : State<RootCreator>
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
+
+        
+
         if (Physics.Raycast(ray, out hit, 100f, owner.pOwner.playingField))
         {
             Vector3 p1 = lineRenderer.GetPosition(0);
             Vector3 p2 = ray.GetPoint(hit.distance);
             Vector3 dir = (p2 - p1).normalized;
+
+            Vector3 placePoint = new Vector3(ray.GetPoint(hit.distance).x, p1.y, ray.GetPoint(hit.distance).z);
 
             lineRenderer.sharedMaterial = owner.pOwner.lineMaterials[0];
             canPlace = true;
@@ -89,13 +100,16 @@ public class RootEditState : State<RootCreator>
 
             if ((p2 - p1).magnitude > owner.pOwner.maxLength)
             {
-                
-                lineRenderer.SetPosition(1, p1 + (dir * owner.pOwner.maxLength));
+
+                Vector3 correctedPosition = p1 + (dir * owner.pOwner.maxLength);
+                correctedPosition.y = 0f;
+
+                lineRenderer.SetPosition(1, correctedPosition);
             }
             else
             {
 
-                lineRenderer.SetPosition(1, ray.GetPoint(hit.distance));
+                lineRenderer.SetPosition(1, placePoint);
             }
             
             if (Input.GetMouseButtonDown(0) && canPlace)
@@ -104,7 +118,7 @@ public class RootEditState : State<RootCreator>
                 owner.pOwner.rootList.Add(root);
                 if (Input.GetKey(KeyCode.LeftControl))
                 {
-                    lineRenderer.SetPosition(0, ray.GetPoint(hit.distance));
+                    lineRenderer.SetPosition(0, placePoint);
                 }
                 else
                 {
@@ -115,5 +129,31 @@ public class RootEditState : State<RootCreator>
 
         }
 
+    }
+}
+
+public class RootFightState : State<RootCreator>
+{
+    protected FSM<RootCreator> owner;
+    public RootFightState(FSM<RootCreator> _owner)
+    {
+        owner = _owner;
+    }
+
+    public override void OnEnter()
+    {
+        Debug.Log("daytime has arrived");
+    }
+
+    public override void OnUpdate()
+    {
+
+        if (DayCycle.Instance.isNight)
+        {
+            Debug.Log("night comes");
+            owner.SwitchState(typeof(RootEmptyState));
+        }
+
+        
     }
 }
