@@ -26,6 +26,9 @@ public class RootCreator : MonoBehaviour
     [Min(0)]
     public int rootPointCost = 10;
 
+    [Min(0)]
+    public int rootPointIncreasePerRound = 20;
+
 
     FSM<RootCreator> fsm;
 
