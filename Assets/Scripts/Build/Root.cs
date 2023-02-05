@@ -6,6 +6,7 @@ public class Root : MonoBehaviour
 {
     public List<Mesh> meshList = new List<Mesh>();
     int lifetime;
+    public float growSpeed = 0.4f;
 
     Material[] mats;
 
@@ -27,7 +28,7 @@ public class Root : MonoBehaviour
         {
             if(mats[i].GetFloat("_grow") < 1)
             {
-                mats[i].SetFloat("_grow", mats[i].GetFloat("_grow") + 0.2f * Time.deltaTime);
+                mats[i].SetFloat("_grow", mats[i].GetFloat("_grow") + growSpeed * Time.deltaTime);
             }
         }
     }

@@ -95,13 +95,17 @@ public class RootEditState : State<RootCreator>
                 lineRenderer.sharedMaterial = owner.pOwner.lineMaterials[1];
                 canPlace = false;
             }
+            if (owner.pOwner.rootPoints < owner.pOwner.rootPointCost)
+            {
+                lineRenderer.sharedMaterial = owner.pOwner.lineMaterials[1];
+                canPlace = false;
+            }
 
 
-
-            if ((p2 - p1).magnitude > owner.pOwner.maxLength)
+            if ((p2 - p1).magnitude > owner.pOwner.maxLengthPerRoot)
             {
 
-                Vector3 correctedPosition = p1 + (dir * owner.pOwner.maxLength);
+                Vector3 correctedPosition = p1 + (dir * owner.pOwner.maxLengthPerRoot);
                 correctedPosition.y = 0f;
 
                 lineRenderer.SetPosition(1, correctedPosition);
@@ -116,15 +120,12 @@ public class RootEditState : State<RootCreator>
             {
                 GameObject root = owner.pOwner.PlaceRoot();
                 owner.pOwner.rootList.Add(root);
-                if (Input.GetKey(KeyCode.LeftControl))
-                {
-                    lineRenderer.SetPosition(0, placePoint);
-                }
-                else
-                {
-                    owner.SwitchState(typeof(RootEmptyState));
-                }
+                owner.SwitchState(typeof(RootEmptyState));
 
+            }
+            if (Input.GetMouseButtonDown(1))
+            {
+                owner.SwitchState(typeof(RootEmptyState));
             }
 
         }
@@ -151,9 +152,15 @@ public class RootFightState : State<RootCreator>
         if (DayCycle.Instance.isNight)
         {
             Debug.Log("night comes");
+            
             owner.SwitchState(typeof(RootEmptyState));
         }
 
         
+    }
+
+    public override void OnExit()
+    {
+        owner.pOwner.rootPoints += 20;
     }
 }
