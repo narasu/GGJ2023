@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class RootEmptyState : State<RootCreator>
@@ -32,6 +33,7 @@ public class RootEmptyState : State<RootCreator>
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 100f, owner.pOwner.rootSpawnArea))
         {
+            //start placing root (line)
             if (Input.GetMouseButtonDown(0))
             {
                 lineRenderer.positionCount = 2;
@@ -116,13 +118,18 @@ public class RootEditState : State<RootCreator>
                 lineRenderer.SetPosition(1, placePoint);
             }
             
+            //finalize placing root
             if (Input.GetMouseButtonDown(0) && canPlace)
             {
                 GameObject root = owner.pOwner.PlaceRoot();
                 owner.pOwner.rootList.Add(root);
                 owner.SwitchState(typeof(RootEmptyState));
+                owner.pOwner.place_root.Play();
+
 
             }
+
+            //cancel placing root
             if (Input.GetMouseButtonDown(1))
             {
                 owner.SwitchState(typeof(RootEmptyState));
@@ -140,10 +147,15 @@ public class RootFightState : State<RootCreator>
     {
         owner = _owner;
     }
-
+    
     public override void OnEnter()
     {
+        //day starts
         Debug.Log("daytime has arrived");
+        owner.pOwner.bgMusic.SetParameter("day_night_switch", 1);
+        owner.pOwner.getting_day.Play();
+        owner.pOwner.night_amb.Stop();
+        owner.pOwner.day_amb.Play();
     }
 
     public override void OnUpdate()
@@ -161,6 +173,11 @@ public class RootFightState : State<RootCreator>
 
     public override void OnExit()
     {
+        //day ends
         owner.pOwner.rootPoints += owner.pOwner.rootPoints += owner.pOwner.rootPointIncreasePerRound;
+        owner.pOwner.bgMusic.SetParameter("day_night_switch", 0);
+        owner.pOwner.getting_night.Play();
+        owner.pOwner.night_amb.Play();
+        owner.pOwner.day_amb.Stop();
     }
 }

@@ -14,6 +14,13 @@ public class RootCreator : MonoBehaviour
     public LayerMask playingField;
     public LayerMask obstacle;
     public GameObject rootPrefab;
+    //sound vars
+    public FMODUnity.StudioEventEmitter bgMusic;
+    public FMODUnity.StudioEventEmitter place_root;
+    public FMODUnity.StudioEventEmitter getting_day;
+    public FMODUnity.StudioEventEmitter getting_night;
+    public FMODUnity.StudioEventEmitter day_amb;
+    public FMODUnity.StudioEventEmitter night_amb;
 
     public TMP_Text pointText;
 

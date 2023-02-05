@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{5a55adda-c173-4860-aa2c-fd08cb923989}">
+		<property name="assetPath">
+			<value>daytime.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>3.6369791666666669</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{8a5edba4-144c-42e7-8442-0d26ba1b56f6}</destination>
+		</relationship>
+	</object>
+</objects>

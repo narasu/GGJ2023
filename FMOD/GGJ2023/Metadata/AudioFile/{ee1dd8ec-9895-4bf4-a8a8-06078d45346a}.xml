@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{ee1dd8ec-9895-4bf4-a8a8-06078d45346a}">
+		<property name="assetPath">
+			<value>168420__gurek__bushes-01 7.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>3.0947619047619046</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{8a5edba4-144c-42e7-8442-0d26ba1b56f6}</destination>
+		</relationship>
+	</object>
+</objects>
