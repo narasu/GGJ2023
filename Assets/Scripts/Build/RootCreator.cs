@@ -8,10 +8,13 @@ public class RootCreator : MonoBehaviour
 {
 
     [HideInInspector] public LineRenderer lineRenderer;
+    public Material[] lineMaterials;
     public LayerMask rootSpawnArea;
     public LayerMask playingField;
+    public LayerMask obstacle;
     public GameObject rootPrefab;
-    public Transform tree;
+
+    [HideInInspector] public GameObject currentNode;
 
     public float pRootPoints
     {
@@ -27,14 +30,15 @@ public class RootCreator : MonoBehaviour
             SetMaxLength();
         }
     }
+
+    [SerializeField]
     private float rootPoints = 50f;
+
+    [SerializeField][Range(0, 25)]
+    private float pointsToRootLengthDivider = 10f;
 
     [HideInInspector] public float maxLength;
 
-    private void SetMaxLength()
-    {
-        maxLength = Mathf.Floor(rootPoints / 10);
-    }
 
 
 
@@ -58,36 +62,17 @@ public class RootCreator : MonoBehaviour
 
     void Start()
     {
-        
-
-
-        //cylinderList.Add() 
     }
 
     void Update()
     {
         fsm.Update();
 
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        //    RaycastHit hit2;
-        //    if (Physics.Raycast(ray, out hit2))
-        //    {
-        //        if (hit2.collider.CompareTag("PlayingField"))
-        //        {
-        //            GameObject o = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        //            o.transform.position = ray2.GetPoint(hit2.distance);
-        //        }
-        //    }
-        //}
-
     }
 
-    void StartLine(Vector3 _startingPoint)
+    private void SetMaxLength()
     {
-
+        maxLength = Mathf.Floor(rootPoints / 10);
     }
 
     public GameObject PlaceRoot()
