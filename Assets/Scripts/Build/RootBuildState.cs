@@ -161,6 +161,6 @@ public class RootFightState : State<RootCreator>
 
     public override void OnExit()
     {
-        owner.pOwner.rootPoints += 20;
+        owner.pOwner.rootPoints += owner.pOwner.rootPoints += owner.pOwner.rootPointIncreasePerRound;
     }
 }
