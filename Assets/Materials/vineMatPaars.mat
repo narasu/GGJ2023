@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: vinematerial 1
+  m_Name: vineMatPaars
   m_Shader: {fileID: -6465566751694194690, guid: 98a7430262b3f184798d360488e17f7a,
     type: 3}
   m_ValidKeywords: []
@@ -37,13 +37,13 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _alphaclip: 1
-    - _grow: 0.839
+    - _alphaclip: 0.999
+    - _grow: 1
     - _metallic: 0
-    - _scale: 1.28
+    - _scale: -10.03
     - _smoothness: 0
     m_Colors:
-    - _Color: {r: 0.24430057, g: 0.3490566, b: 0.13336597, a: 0}
+    - _Color: {r: 0.3686552, g: 0.24875402, b: 0.8113208, a: 0}
     - _Vector3: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7500856437663241718

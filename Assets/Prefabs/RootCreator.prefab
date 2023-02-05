@@ -173,7 +173,7 @@ MonoBehaviour:
   obstacle:
     serializedVersion: 2
     m_Bits: 512
-  rootPrefab: {fileID: 5283760663654909237, guid: 2ac9106d3fb69f344ab75e5602c57395,
+  rootPrefab: {fileID: 8764218117969535527, guid: cdf84243301336e409169eff6b590692,
     type: 3}
   currentNode: {fileID: 0}
   rootPoints: 50
