@@ -27,9 +27,9 @@ public class RootCreator : MonoBehaviour
             SetMaxLength();
         }
     }
-    private float rootPoints;
+    private float rootPoints = 50f;
 
-    [HideInInspector] public float maxLength = 5f;
+    [HideInInspector] public float maxLength;
 
     private void SetMaxLength()
     {
@@ -44,12 +44,14 @@ public class RootCreator : MonoBehaviour
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
+        SetMaxLength();
 
         fsm = new FSM<RootCreator>();
         fsm.Initialize(this);
         fsm.AddState(new RootEmptyState(fsm));
         fsm.AddState(new RootEditState(fsm));
 
+        
         fsm.SwitchState(typeof(RootEmptyState));
     }
 

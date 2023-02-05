@@ -55,6 +55,7 @@ public class RootEditState : State<RootCreator>
     public override void OnEnter()
     {
         base.OnEnter();
+        Debug.Log(owner.pOwner.maxLength);
     }
 
     public override void OnUpdate()
@@ -70,15 +71,16 @@ public class RootEditState : State<RootCreator>
             Vector3 p1 = lineRenderer.GetPosition(0);
             Vector3 p2 = ray.GetPoint(hit.distance);
             Vector3 dir = (p2 - p1).normalized;
-            Debug.Log((p2 - p1).magnitude);
+            //Debug.Log((p2 - p1).magnitude);
 
             if ((p2 - p1).magnitude > owner.pOwner.maxLength)
             {
-                Debug.Log("length exceeded");
-                lineRenderer.SetPosition(1, p1 + dir * owner.pOwner.maxLength);
+                
+                lineRenderer.SetPosition(1, p1 + (dir * owner.pOwner.maxLength));
             }
             else
             {
+
                 lineRenderer.SetPosition(1, ray.GetPoint(hit.distance));
             }
             
