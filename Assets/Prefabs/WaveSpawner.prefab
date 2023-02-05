@@ -152,7 +152,7 @@ MonoBehaviour:
   - waveName: 1
     NrOfEnemies: 4
     TypeOfEnemies:
-    - {fileID: 1904146894196439968, guid: 8713e3fe0b700e94e9528e947253c2e6, type: 3}
+    - {fileID: 1904146894196439968, guid: b50f1c77888751842b916d69312f9bdd, type: 3}
     spawnInterval: 1
   - waveName: 2
     NrOfEnemies: 4

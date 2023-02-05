@@ -6,7 +6,6 @@ public class EnemyHealth : MonoBehaviour
 {
     public static EnemyHealth Instance;
     public float MaxEnemyHealth;
-
     public float currentEnemyHealth;
 
     void awake()

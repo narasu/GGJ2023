@@ -1124,6 +1124,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaveSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 3528124679786035430, guid: bf9390429987caa4ba6201bc566c8260,
+        type: 3}
+      propertyPath: wave.Array.data[1].TypeOfEnemies.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3528124679786035430, guid: bf9390429987caa4ba6201bc566c8260,
+        type: 3}
+      propertyPath: wave.Array.data[1].TypeOfEnemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 1904146894196439968, guid: b50f1c77888751842b916d69312f9bdd,
+        type: 3}
     - target: {fileID: 3528124679786035431, guid: bf9390429987caa4ba6201bc566c8260,
         type: 3}
       propertyPath: m_RootOrder
