@@ -12,10 +12,16 @@ public class DayCycle : MonoBehaviour
         Instance = this;
     }
 
+    private void Update()
+    {
+        print(isNight);
+    }
+
     public void Night()
     {
         if (isNight)
         {
+
         }
     }
 
@@ -27,5 +33,4 @@ public class DayCycle : MonoBehaviour
 
         }
     }
-
 }

@@ -64,7 +64,9 @@ public class PauseMenu : MonoBehaviour
 
     public void EndNight()
     {
+        //set de light naar dag
         global::DayCycle.Instance.isNight = false;
+
         //EndTurnButton.SetActive(false);
         DayCycle.SetFloat("DayNightCycle", 1);
     }
