@@ -32,13 +32,13 @@ public class waveSpawner : MonoBehaviour
 
     private void Awake()
     {
-        CurrentWaveNumber = -1;
+        CurrentWaveNumber = 0;
         Instance = this;
     }
     void Update()
     {
-        print(CurrentWaveNumber);
-        print(wave[CurrentWaveNumber]);
+        // print(CurrentWaveNumber);
+        // print(wave[CurrentWaveNumber]);
 
         CurrentWave = wave[CurrentWaveNumber]; //if currentwavenr is 0 wave 1 is active and so on
         spawnWave(); //spawn a wave
@@ -86,7 +86,7 @@ public class waveSpawner : MonoBehaviour
             nextSpawnTime = Time.time + CurrentWave.spawnInterval; //countdown the spawntime interval
             EnemiesSpawned++;
 
-            print(CurrentWave.NrOfEnemies);
+            //print(CurrentWave.NrOfEnemies);
 
             if (CurrentWave.NrOfEnemies == 0)
             {
