@@ -93,9 +93,6 @@ public class waveSpawner : MonoBehaviour
                 //stop spawning if there's no more enemies in the list
                 canSpawn = false;
                 canAnimate = true;
-                //start daycycle animatie
-                DayCycle.Instance.isNight = true;
-                DayCycle.Instance.Night();
             }
         }
     }

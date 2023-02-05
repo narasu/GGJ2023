@@ -278,8 +278,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 0.16
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -316,13 +316,13 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2147483647
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 6570
+  m_ColorTemperature: 14580
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
@@ -1126,9 +1126,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3528124679786035430, guid: bf9390429987caa4ba6201bc566c8260,
         type: 3}
+      propertyPath: wave.Array.data[0].TypeOfEnemies.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3528124679786035430, guid: bf9390429987caa4ba6201bc566c8260,
+        type: 3}
       propertyPath: wave.Array.data[1].TypeOfEnemies.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3528124679786035430, guid: bf9390429987caa4ba6201bc566c8260,
+        type: 3}
+      propertyPath: wave.Array.data[0].TypeOfEnemies.Array.data[1]
+      value: 
+      objectReference: {fileID: 1904146894196439968, guid: b50f1c77888751842b916d69312f9bdd,
+        type: 3}
+    - target: {fileID: 3528124679786035430, guid: bf9390429987caa4ba6201bc566c8260,
+        type: 3}
+      propertyPath: wave.Array.data[0].TypeOfEnemies.Array.data[2]
+      value: 
+      objectReference: {fileID: 1904146894196439968, guid: b50f1c77888751842b916d69312f9bdd,
+        type: 3}
     - target: {fileID: 3528124679786035430, guid: bf9390429987caa4ba6201bc566c8260,
         type: 3}
       propertyPath: wave.Array.data[1].TypeOfEnemies.Array.data[0]
