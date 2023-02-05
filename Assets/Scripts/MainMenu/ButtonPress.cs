@@ -11,4 +11,14 @@ public class ButtonPress : MonoBehaviour
     public void PlayCredits(){
         SceneManager.LoadScene("Credits");
     }
+
+    public void GotoMainMenu()
+    {
+        SceneManager.LoadScene("StartScreen");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

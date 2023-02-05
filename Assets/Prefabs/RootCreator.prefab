@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5334876475028276988}
   - component: {fileID: 5334876475028276989}
   - component: {fileID: 5334876475028276991}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RootCreator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,8 +175,8 @@ MonoBehaviour:
     m_Bits: 512
   rootPrefab: {fileID: 8764218117969535527, guid: cdf84243301336e409169eff6b590692,
     type: 3}
-  currentNode: {fileID: 0}
+  pointText: {fileID: 0}
   rootPoints: 50
-  pointsToRootLengthDivider: 10
-  maxLength: 0
+  maxLengthPerRoot: 25
+  rootPointCost: 10
   rootList: []
