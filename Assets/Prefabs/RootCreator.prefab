@@ -53,7 +53,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a8182156d78dcfc458e59f788b7297db, type: 2}
+  - {fileID: 2100000, guid: ca37ba0a59c7b7f4096a878a0fd8cc43, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 0}
   lineMaterials:
-  - {fileID: 2100000, guid: a8182156d78dcfc458e59f788b7297db, type: 2}
+  - {fileID: 2100000, guid: ca37ba0a59c7b7f4096a878a0fd8cc43, type: 2}
   - {fileID: 2100000, guid: 34aab768a7b8ae447af17660b73637be, type: 2}
   rootSpawnArea:
     serializedVersion: 2
@@ -175,7 +175,8 @@ MonoBehaviour:
     m_Bits: 512
   rootPrefab: {fileID: 5283760663654909237, guid: 2ac9106d3fb69f344ab75e5602c57395,
     type: 3}
-  tree: {fileID: 0}
   currentNode: {fileID: 0}
+  rootPoints: 50
+  pointsToRootLengthDivider: 10
   maxLength: 0
   rootList: []
