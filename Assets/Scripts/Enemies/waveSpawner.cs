@@ -17,31 +17,40 @@ public class Wave
 
 public class waveSpawner : MonoBehaviour
 {//script for spawning the enemies in waves
+    public static waveSpawner Instance;
     public Wave[] wave;
     public Transform[] spawnpoint;
     private Wave CurrentWave;
     public Animator Animator;
     public TextMeshProUGUI waveName;
-    private int CurrentWaveNumber = 0; //will help us know what wave we are in
+    public float EnemiesSpawned = 0;
+    private int CurrentWaveNumber; //will help us know what wave we are in
 
-    private bool canSpawn = true;
+    private bool canSpawn = false;
     private bool canAnimate = false;
     private float nextSpawnTime;
+
+    private void Awake()
+    {
+        CurrentWaveNumber = -1;
+        Instance = this;
+    }
     void Update()
     {
+        print(CurrentWaveNumber);
+        print(wave[CurrentWaveNumber]);
+
         CurrentWave = wave[CurrentWaveNumber]; //if currentwavenr is 0 wave 1 is active and so on
-        if (!DayCycle.Instance.isNight)
-        {
-            spawnWave(); //spawn a wave
-        }
+        spawnWave(); //spawn a wave
+
         GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Enemies");
-        if (totalEnemies.Length == 0 && !DayCycle.Instance.isNight)
+        if (totalEnemies.Length == 0)
         {
-            print("test");
             if (CurrentWaveNumber + 1 != wave.Length)
             {
                 if (canAnimate)
                 {
+                    PauseMenu.Instance.DayCycle.SetFloat("DayNightCycle", -1);
                     waveName.text = wave[CurrentWaveNumber + 1].waveName;
                     Animator.SetTrigger("WaveComplete");
                     canAnimate = false;
@@ -53,12 +62,12 @@ public class waveSpawner : MonoBehaviour
                 Animator.SetBool("Win", true);
             }
         }
-        if (totalEnemies.Length == 0){
-            PauseMenu.Instance.DayCycle.SetFloat("DayNightCycle", -1);
+        if (totalEnemies.Length == 0)
+        {
         }
     }
 
-    void spawnNextWave()
+    public void spawnNextWave()
     {
         CurrentWaveNumber++;
         canSpawn = true;
@@ -72,8 +81,12 @@ public class waveSpawner : MonoBehaviour
             GameObject randomEnemy = CurrentWave.TypeOfEnemies[Random.Range(0, CurrentWave.TypeOfEnemies.Length)]; //select a random enemy from list
             Transform RandomPoint = spawnpoint[Random.Range(0, spawnpoint.Length)]; //select a random spawnpoint
             Instantiate(randomEnemy, RandomPoint.position, Quaternion.identity); //spawn the enemy
+
             CurrentWave.NrOfEnemies--; //decrease the amount of enemies it needs to spawn
             nextSpawnTime = Time.time + CurrentWave.spawnInterval; //countdown the spawntime interval
+            EnemiesSpawned++;
+
+            print(CurrentWave.NrOfEnemies);
 
             if (CurrentWave.NrOfEnemies == 0)
             {
