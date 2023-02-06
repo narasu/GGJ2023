@@ -31,13 +31,14 @@ public class HealthBar : MonoBehaviour
         float fillValue = playerHealth.currentHealth / playerHealth.MaxHealth; //fill value is calculated using current health and maxhealth
         if (fillValue <= slider.maxValue / 3)
         {
-            fillImage.color = new Color(.8f, 0f, 0f); //health in critical condition (red).
+            fillImage.color = new Color(.53f, .11f, .15f); //health in critical condition (red).
 
         }
         else if (fillValue > slider.maxValue / 3)
         {
-            fillImage.color = new Color(0f, 1f, 0f); // health normal condition (green)
+            fillImage.color = new Color(0f, .8f, .12f); // health normal condition (green)
         }
+
         slider.value = fillValue; //slider value is set to calculated health value.
     }
 }
