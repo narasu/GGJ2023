@@ -11,26 +11,5 @@ public class DayCycle : MonoBehaviour
     {
         Instance = this;
     }
-
-    private void Update()
-    {
-        print(isNight);
-    }
-
-    public void Night()
-    {
-        if (isNight)
-        {
-
-        }
-    }
-
-    public void Day()
-    {
-        if (!isNight)
-        {
-            //reference player script zodat player niet meer kan bewegen en enemy spawn begint.
-
-        }
-    }
 }
+

@@ -76,4 +76,8 @@ public class PauseMenu : MonoBehaviour
         global::DayCycle.Instance.isNight = true;
         //animatie om nacht te starten staat in waveSpawner.cs
     }
+    public void StartBuilding()
+    {
+        RootEmptyState.ChangeState();
+    }
 }

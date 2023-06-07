@@ -5,6 +5,7 @@ using UnityEngine;
 public class RootEmptyState : State<RootCreator>
 {
     protected FSM<RootCreator> owner;
+    static public bool SwitchState = false;
     LineRenderer lineRenderer;
     public RootEmptyState(FSM<RootCreator> _owner)
     {
@@ -21,17 +22,26 @@ public class RootEmptyState : State<RootCreator>
     {
         base.OnUpdate();
 
+        if (SwitchState == true)
+        {
+            owner.SwitchState(typeof(BuildDefenses));
+        }
+
         if (!DayCycle.Instance.isNight)
         {
-            
             owner.SwitchState(typeof(RootFightState));
         }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
+
+
+        //op de roots zitten belzier curves die onder de rootspawnarea layermask vallen. bij deze raycast wordt gecheckts of de muis op die layer mask zit en zo ja dan kan je een
+        // root spawnen op dat oppervlak
         if (Physics.Raycast(ray, out hit, 100f, owner.pOwner.rootSpawnArea))
         {
+            //"0" staat voor primairy mouse button, 1 is je secondairy en 2 is je middle mouse button
             if (Input.GetMouseButtonDown(0))
             {
                 lineRenderer.positionCount = 2;
@@ -42,6 +52,49 @@ public class RootEmptyState : State<RootCreator>
 
         }
     }
+    static public void ChangeState()
+    {
+        RootEmptyState.SwitchState = true;
+    }
+}
+
+public class BuildDefenses : State<RootCreator>
+{
+    protected FSM<RootCreator> owner;
+
+    //dit is hetzelfde als een awake funciton.
+    public BuildDefenses(FSM<RootCreator> _owner)
+    {
+        owner = _owner;
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        Debug.Log("were building defenses baby");
+
+        //maak een var die de positie van de mouse trackt.
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        //maak een raycasthit var die hit heet
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 100f, owner.pOwner.rootSpawnArea))
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                GameObject building = owner.pOwner.PlaceBuilding(1, hit.point);
+                owner.pOwner.buildingsList.Add(building);
+                Debug.Log("NU MAAK JE EEN GEBOUW DIE KAN DEFENDEN");
+                Build();
+            }
+        }
+    }
+
+    void Build()
+    {
+    }
+
 }
 
 public class RootEditState : State<RootCreator>
@@ -69,9 +122,7 @@ public class RootEditState : State<RootCreator>
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
-
-        
-
+        //logic voor mouse input
         if (Physics.Raycast(ray, out hit, 100f, owner.pOwner.playingField))
         {
             Vector3 p1 = lineRenderer.GetPosition(0);
@@ -90,7 +141,7 @@ public class RootEditState : State<RootCreator>
                 lineRenderer.sharedMaterial = owner.pOwner.lineMaterials[1];
                 canPlace = false;
             }
-            if (Physics.Raycast(p1, dir, (p2-p1).magnitude, owner.pOwner.obstacle))
+            if (Physics.Raycast(p1, dir, (p2 - p1).magnitude, owner.pOwner.obstacle))
             {
                 lineRenderer.sharedMaterial = owner.pOwner.lineMaterials[1];
                 canPlace = false;
@@ -111,7 +162,7 @@ public class RootEditState : State<RootCreator>
 
                 lineRenderer.SetPosition(1, placePoint);
             }
-            
+
             if (Input.GetMouseButtonDown(0) && canPlace)
             {
                 GameObject root = owner.pOwner.PlaceRoot();
@@ -124,7 +175,6 @@ public class RootEditState : State<RootCreator>
                 {
                     owner.SwitchState(typeof(RootEmptyState));
                 }
-
             }
 
         }
@@ -154,6 +204,6 @@ public class RootFightState : State<RootCreator>
             owner.SwitchState(typeof(RootEmptyState));
         }
 
-        
+
     }
 }

@@ -3,18 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//voegt automaitsch een component toe dat het game object nodig heeft. in dit geval de line renderer omdat de line render laat zien waar je de roots plaatst
 [RequireComponent(typeof(LineRenderer))]
 public class RootCreator : MonoBehaviour
 {
 
     [HideInInspector] public LineRenderer lineRenderer;
+    [HideInInspector] public GameObject currentNode;
     public Material[] lineMaterials;
     public LayerMask rootSpawnArea;
     public LayerMask playingField;
     public LayerMask obstacle;
     public GameObject rootPrefab;
-
-    [HideInInspector] public GameObject currentNode;
+    public GameObject[] Buildings;
 
     public float pRootPoints
     {
@@ -34,17 +35,16 @@ public class RootCreator : MonoBehaviour
     [SerializeField]
     private float rootPoints = 50f;
 
-    [SerializeField][Range(0, 25)]
+    [SerializeField]
+    [Range(0, 25)]
     private float pointsToRootLengthDivider = 10f;
 
     [HideInInspector] public float maxLength;
 
-
-
-
     FSM<RootCreator> fsm;
 
     public List<GameObject> rootList = new List<GameObject>();
+    public List<GameObject> buildingsList = new List<GameObject>();
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
@@ -55,20 +55,15 @@ public class RootCreator : MonoBehaviour
         fsm.AddState(new RootEmptyState(fsm));
         fsm.AddState(new RootEditState(fsm));
         fsm.AddState(new RootFightState(fsm));
-
+        fsm.AddState(new BuildDefenses(fsm));
 
         fsm.SwitchState(typeof(RootEmptyState));
     }
 
 
-    void Start()
-    {
-    }
-
     void Update()
     {
         fsm.Update();
-
     }
 
     private void SetMaxLength()
@@ -86,11 +81,21 @@ public class RootCreator : MonoBehaviour
         newRoot.transform.rotation = Quaternion.LookRotation(delta);
         newRoot.transform.Rotate(-90, 0, 0);
         newRoot.transform.position = (p1 + p2) / 2f;
+        //dit zorgt ervoor dat de root zolang is als de distance tussen de muis en het groeipunt.
         Vector3 scale = newRoot.transform.localScale;
         scale.y = delta.magnitude / 2f;
         newRoot.transform.localScale = scale;
 
         return newRoot;
+    }
+
+    public GameObject PlaceBuilding(float BuildingType, Vector3 mousePos)
+    {
+        GameObject newBuilding = Instantiate(Buildings[0]);
+
+        newBuilding.transform.position = mousePos;
+        print(mousePos);
+        return newBuilding;
     }
 
 }
