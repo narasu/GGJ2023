@@ -17,6 +17,15 @@ public class RootEmptyState : State<RootCreator>
     {
         owner.pOwner.lineRenderer.positionCount = 0;
         Debug.Log("emptystate");
+        if (PlayerController.Instance == null)
+        {
+
+        }
+        else if (PlayerController.Instance.currency == 0)
+        {
+
+            owner.SwitchState(typeof(NoFunds));
+        }
     }
 
     public override void OnUpdate()
@@ -79,6 +88,10 @@ public class BuildDefenses : State<RootCreator>
     {
         base.OnUpdate();
         //Debug.Log("were building defenses baby");
+        if (PlayerController.Instance.currency <= 0)
+        {
+            owner.SwitchState(typeof(NoFunds));
+        }
 
         if (SwitchState)
         {
@@ -96,10 +109,11 @@ public class BuildDefenses : State<RootCreator>
         {
             if (Input.GetMouseButtonDown(0))
             {
+                PlayerController.Instance.currency -= 1;
                 //geef bij 1 het nr in van het gebouw dat je gaat bouwen.
                 GameObject building = owner.pOwner.PlaceBuilding(1, hit.point);
                 owner.pOwner.buildingsList.Add(building);
-//                Debug.Log("NU MAAK JE EEN GEBOUW DIE KAN DEFENDEN");
+                //                Debug.Log("NU MAAK JE EEN GEBOUW DIE KAN DEFENDEN");
             }
         }
     }
@@ -127,6 +141,12 @@ public class RootEditState : State<RootCreator>
     public override void OnEnter()
     {
         base.OnEnter();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        PlayerController.Instance.currency -= 1;
     }
 
     public override void OnUpdate()
@@ -221,5 +241,44 @@ public class RootFightState : State<RootCreator>
         }
 
 
+    }
+}
+
+public class NoFunds : State<RootCreator>
+{
+    protected FSM<RootCreator> owner;
+    static public bool switchState = false;
+    private float _fadeTime = 3;
+
+    public NoFunds(FSM<RootCreator> _owner)
+    {
+        owner = _owner;
+    }
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        FadeOut();
+    }
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if (Input.GetMouseButton(0))
+        {
+            Debug.Log("no more funds");
+            //FadeOut();
+        }
+    }
+    private IEnumerator FadeOut()
+    {
+        float duration = 2f; //Fade out over 2 seconds.
+        float currentTime = 0f;
+        while (currentTime < duration)
+        {
+            float alpha = Mathf.Lerp(1f, 0f, currentTime / duration);
+            PlayerController.Instance.noFundsWarning.color = new Color(PlayerController.Instance.noFundsWarning.color.r, PlayerController.Instance.noFundsWarning.color.g, PlayerController.Instance.noFundsWarning.color.b, alpha);
+            currentTime += Time.deltaTime;
+            yield return null;
+        }
+        yield break;
     }
 }

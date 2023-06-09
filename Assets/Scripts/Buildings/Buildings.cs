@@ -63,10 +63,5 @@ public class Buildings : MonoBehaviour
             anim.enabled = true;
         }
     }
-
-    IEnumerator Wait()
-    {
-        yield return new WaitForSeconds(0.25f);
-    }
 }
 

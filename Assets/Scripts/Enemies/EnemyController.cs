@@ -20,6 +20,6 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Enemy.SetDestination(PlayerController.Instance.Player.position);
+        Enemy.SetDestination(PlayerController.Instance.player.position);
     }
 }
