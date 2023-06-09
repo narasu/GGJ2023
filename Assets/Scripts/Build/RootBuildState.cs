@@ -16,15 +16,18 @@ public class RootEmptyState : State<RootCreator>
     public override void OnEnter()
     {
         owner.pOwner.lineRenderer.positionCount = 0;
+        Debug.Log("emptystate");
     }
 
     public override void OnUpdate()
     {
+
         base.OnUpdate();
 
         if (SwitchState == true)
         {
             owner.SwitchState(typeof(BuildDefenses));
+            SwitchState = false;
         }
 
         if (!DayCycle.Instance.isNight)
@@ -35,7 +38,6 @@ public class RootEmptyState : State<RootCreator>
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
-
 
         //op de roots zitten belzier curves die onder de rootspawnarea layermask vallen. bij deze raycast wordt gecheckts of de muis op die layer mask zit en zo ja dan kan je een
         // root spawnen op dat oppervlak
@@ -61,7 +63,12 @@ public class RootEmptyState : State<RootCreator>
 public class BuildDefenses : State<RootCreator>
 {
     protected FSM<RootCreator> owner;
+    static public bool SwitchState = false;
 
+    public override void OnEnter()
+    {
+        Debug.Log("builddefenses");
+    }
     //dit is hetzelfde als een awake funciton.
     public BuildDefenses(FSM<RootCreator> _owner)
     {
@@ -71,7 +78,13 @@ public class BuildDefenses : State<RootCreator>
     public override void OnUpdate()
     {
         base.OnUpdate();
-        Debug.Log("were building defenses baby");
+        //Debug.Log("were building defenses baby");
+
+        if (SwitchState)
+        {
+            owner.SwitchState(typeof(RootFightState));
+            SwitchState = false;
+        }
 
         //maak een var die de positie van de mouse trackt.
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -83,16 +96,17 @@ public class BuildDefenses : State<RootCreator>
         {
             if (Input.GetMouseButtonDown(0))
             {
+                //geef bij 1 het nr in van het gebouw dat je gaat bouwen.
                 GameObject building = owner.pOwner.PlaceBuilding(1, hit.point);
                 owner.pOwner.buildingsList.Add(building);
-                Debug.Log("NU MAAK JE EEN GEBOUW DIE KAN DEFENDEN");
-                Build();
+//                Debug.Log("NU MAAK JE EEN GEBOUW DIE KAN DEFENDEN");
             }
         }
     }
 
-    void Build()
+    static public void ChangeState()
     {
+        BuildDefenses.SwitchState = true;
     }
 
 }
@@ -185,6 +199,7 @@ public class RootEditState : State<RootCreator>
 public class RootFightState : State<RootCreator>
 {
     protected FSM<RootCreator> owner;
+    static public bool switchState = false;
     public RootFightState(FSM<RootCreator> _owner)
     {
         owner = _owner;
@@ -192,15 +207,16 @@ public class RootFightState : State<RootCreator>
 
     public override void OnEnter()
     {
-        Debug.Log("daytime has arrived");
+        //Debug.Log("daytime has arrived");
     }
 
     public override void OnUpdate()
     {
+        Building1.instance.CheckForEnemies();
 
         if (DayCycle.Instance.isNight)
         {
-            Debug.Log("night comes");
+            //Debug.Log("night comes");
             owner.SwitchState(typeof(RootEmptyState));
         }
 

@@ -13,7 +13,7 @@ public class EnemyAttack : MonoBehaviour
             var healthComponent = other.collider.GetComponent<PlayerHealth>();
             if (healthComponent != null)
             {
-                print("we're attacking (enemy)");
+//                print("we're attacking (enemy)");
                 healthComponent.takeDamage(EnemyDamage);
             }
 

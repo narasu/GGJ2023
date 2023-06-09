@@ -16,7 +16,7 @@ public class PlayerHealth : MonoBehaviour
     //this function allows other object to damage the player
     public void takeDamage(int amount)
     {
-        print(currentHealth);
+//        print(currentHealth);
         currentHealth -= amount;
         //once health drops below 0, you're dead
         if (currentHealth <= 0)

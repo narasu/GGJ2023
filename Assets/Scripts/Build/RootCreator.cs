@@ -93,8 +93,9 @@ public class RootCreator : MonoBehaviour
     {
         GameObject newBuilding = Instantiate(Buildings[0]);
 
-        newBuilding.transform.position = mousePos;
-        print(mousePos);
+        //offset toegevoegd omdat anders de building door de root heen spawned. dit zorgt voor problemen met de raycast.
+        newBuilding.transform.position = mousePos + new Vector3(0, 2, 0);
+//        print(mousePos);
         return newBuilding;
     }
 

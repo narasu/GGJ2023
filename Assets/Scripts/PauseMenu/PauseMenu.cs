@@ -69,6 +69,7 @@ public class PauseMenu : MonoBehaviour
 
         //EndTurnButton.SetActive(false);
         DayCycle.SetFloat("DayNightCycle", 1);
+        BuildDefenses.ChangeState();
     }
 
     public void StartNight()
