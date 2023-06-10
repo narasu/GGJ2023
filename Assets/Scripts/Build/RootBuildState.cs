@@ -109,6 +109,10 @@ public class BuildDefenses : State<RootCreator>
         {
             if (Input.GetMouseButtonDown(0))
             {
+                //als de player de muisknop indrukt,
+                //gaat er een bepaalde hoeveelheid punten van zn currency af
+                ///plaatst het script een building
+                /// wordt deze building aan de lijst toe
                 PlayerController.Instance.currency -= 1;
                 //geef bij 1 het nr in van het gebouw dat je gaat bouwen.
                 GameObject building = owner.pOwner.PlaceBuilding(1, hit.point);
@@ -232,7 +236,8 @@ public class RootFightState : State<RootCreator>
 
     public override void OnUpdate()
     {
-        Building1.instance.CheckForEnemies();
+        if (Building1.instance != null)
+            Building1.instance.CheckForEnemies();
 
         if (DayCycle.Instance.isNight)
         {

@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour
     NavMeshAgent Enemy;
     [SerializeField] private float Speed = 10;
     public EnemyHealth EnemyHealth;
+    public float enemyWorth = 1;
 
     private void Awake()
     {
@@ -20,6 +21,7 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(PlayerController.Instance != null)
         Enemy.SetDestination(PlayerController.Instance.player.position);
     }
 }

@@ -15,12 +15,16 @@ public class EnemyHealth : MonoBehaviour
     }
 
 
-    public void EnemyTakeDamge(int amount)
+    public void EnemyTakeDamge(float amount)
     {
         currentEnemyHealth -= amount;
 
         if (currentEnemyHealth <= 0)
         {
+            //geef de player de punten die hij heeft verdient met deze kill
+            PlayerController.Instance.currency += GetComponent<EnemyController>().enemyWorth;
+            FOV.instance.targetsToLookat.Clear();
+            FOV.instance.addedTolist = false;
             Die();
         }
     }
@@ -28,7 +32,6 @@ public class EnemyHealth : MonoBehaviour
     void Die()
     {
         //we're dead
-        //GetComponent<Lootbag>().InstantiateLoot(transform.position);
         Destroy(gameObject);
     }
 }
