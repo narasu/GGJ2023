@@ -115,22 +115,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5680dc88f77ce964b97ba8ec2dd89190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewAngle: 0
-  viewRadius: 0
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 0
-  Root:
-    serializedVersion: 2
-    m_Bits: 0
-  visibleTarget: []
-  attackRange: 1000
-  projectileSpeed: 10
-  damagePerHit: 10
+  projectileSpeed: 50
   rb: {fileID: 0}
   projectilesPrefab: {fileID: 1848061278241329162, guid: 35268bd2d128c034ba82521e631c7f7c,
     type: 3}
-  enemy: {fileID: 0}
   projectileSpawnPoint: {fileID: 4064390551716830376}
 --- !u!114 &6090248442597321171
 MonoBehaviour:
@@ -153,6 +141,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   visibleTarget: []
+  targetsToLookat: []
+  addedTolist: 0
 --- !u!54 &-4368974643544315604
 Rigidbody:
   m_ObjectHideFlags: 0

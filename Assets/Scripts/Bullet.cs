@@ -16,9 +16,21 @@ public class Bullet : MonoBehaviour
     {
         if (other.gameObject.GetComponent<EnemyController>())
         {
-            print("we hebben een houthakker geraakt");
-            Destroy(gameObject);
             other.gameObject.GetComponent<EnemyHealth>().EnemyTakeDamge(Damage);
+        }
+    }
+    public IEnumerator SendHoming(Transform enemyTransform, float projectileSpeed)
+    {
+        while (true)
+        {
+            if (enemyTransform == null)
+            {
+                Destroy(gameObject);
+                break;
+            }
+            transform.position += (enemyTransform.position - transform.position).normalized * projectileSpeed * Time.deltaTime;
+            transform.LookAt(enemyTransform.transform);
+            yield return null;
         }
     }
 }

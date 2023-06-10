@@ -32,27 +32,18 @@ public class Buildings : MonoBehaviour
             var Bullet = Instantiate(projectilesPrefab, projectileSpawnPoint.position, projectilesPrefab.transform.rotation);
             //Bullet.GetComponent<Rigidbody>().velocity = projectileSpawnPoint.forward * projectileSpeed;
             Bullet.transform.LookAt(hit.transform);
-            StartCoroutine(SendHoming(Bullet, enemyTransform));
+            StartCoroutine(Bullet.GetComponent<Bullet>().SendHoming(enemyTransform, projectileSpeed));
 
         }
     }
 
-    public IEnumerator SendHoming(GameObject Bullet, Transform enemyTransform)
-    {
-        while (Vector3.Distance(enemyTransform.position, Bullet.transform.position) > 0.8f)
-        {
-            Bullet.transform.position += (enemyTransform.position - Bullet.transform.position).normalized * projectileSpeed * Time.deltaTime;
-            Bullet.transform.LookAt(enemyTransform.transform);
-            yield return null;
-        }
-        Destroy(Bullet);
-    }
     public void CheckForEnemies()
     {
         //check of er enemies in de lijst zitten om een error te voorkomen
         if (FOV.instance.targetsToLookat.Count != 0)
         {
             //zet de animation uit zodat je de transform van de player kan aanpassen.
+            anim.SetBool("IsPatrolling", false);
             anim.enabled = false;
             //kijk naar de positie van de target. er zit maar een target in de lijst dus het is altijd de eerste target in de lijst.
             transform.LookAt(FOV.instance.targetsToLookat[0].transform.position);
@@ -61,8 +52,8 @@ public class Buildings : MonoBehaviour
         }
         else
         {
-            print("we zien niks");
             anim.enabled = true;
+            anim.SetBool("IsPatrolling", true);
         }
 
     }
