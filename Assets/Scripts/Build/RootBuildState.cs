@@ -262,28 +262,14 @@ public class NoFunds : State<RootCreator>
     public override void OnEnter()
     {
         base.OnEnter();
-        FadeOut();
     }
     public override void OnUpdate()
     {
         base.OnUpdate();
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("no more funds");
-            //FadeOut();
+            PlayerController.Instance.NoFund();
         }
-    }
-    private IEnumerator FadeOut()
-    {
-        float duration = 2f; //Fade out over 2 seconds.
-        float currentTime = 0f;
-        while (currentTime < duration)
-        {
-            float alpha = Mathf.Lerp(1f, 0f, currentTime / duration);
-            PlayerController.Instance.noFundsWarning.color = new Color(PlayerController.Instance.noFundsWarning.color.r, PlayerController.Instance.noFundsWarning.color.g, PlayerController.Instance.noFundsWarning.color.b, alpha);
-            currentTime += Time.deltaTime;
-            yield return null;
-        }
-        yield break;
     }
 }
