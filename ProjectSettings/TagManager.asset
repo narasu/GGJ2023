@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemies
   - PlayingField
+  - CinemachineTarget
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - PlayingField
   - RootSpawnPoint
   - BuildObstacle
-  - TopLayer
+  - Root
   - 
   - 
   - 

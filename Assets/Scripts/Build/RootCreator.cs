@@ -2,71 +2,77 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
+//voegt automaitsch een component toe dat het game object nodig heeft. in dit geval de line renderer omdat de line render laat zien waar je de roots plaatst
 [RequireComponent(typeof(LineRenderer))]
 public class RootCreator : MonoBehaviour
 {
 
     [HideInInspector] public LineRenderer lineRenderer;
+    [HideInInspector] public GameObject currentNode;
     public Material[] lineMaterials;
     public LayerMask rootSpawnArea;
     public LayerMask playingField;
     public LayerMask obstacle;
     public GameObject rootPrefab;
-    //sound vars
-    public FMODUnity.StudioEventEmitter bgMusic;
-    public FMODUnity.StudioEventEmitter place_root;
-    public FMODUnity.StudioEventEmitter getting_day;
-    public FMODUnity.StudioEventEmitter getting_night;
-    public FMODUnity.StudioEventEmitter day_amb;
-    public FMODUnity.StudioEventEmitter night_amb;
+    public GameObject[] Buildings;
 
-    public TMP_Text pointText;
+    public float pRootPoints
+    {
+        get
+        {
+            return rootPoints;
+        }
 
-    [Min(0)]
-    public int rootPoints = 50;
+        set
+        {
+            rootPoints = value;
 
-    [Min(0)]
-    public float maxLengthPerRoot = 25f;
+            SetMaxLength();
+        }
+    }
 
-    [Min(0)]
-    public int rootPointCost = 10;
+    [SerializeField]
+    private float rootPoints = 50f;
 
-    [Min(0)]
-    public int rootPointIncreasePerRound = 20;
+    [SerializeField]
+    [Range(0, 25)]
+    private float pointsToRootLengthDivider = 10f;
 
+    [HideInInspector] public float maxLength;
 
     FSM<RootCreator> fsm;
 
     public List<GameObject> rootList = new List<GameObject>();
+    public List<GameObject> buildingsList = new List<GameObject>();
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
+        SetMaxLength();
 
         fsm = new FSM<RootCreator>();
         fsm.Initialize(this);
         fsm.AddState(new RootEmptyState(fsm));
         fsm.AddState(new RootEditState(fsm));
         fsm.AddState(new RootFightState(fsm));
+        fsm.AddState(new BuildDefenses(fsm));
+        fsm.AddState(new NoFunds(fsm));
 
 
         fsm.SwitchState(typeof(RootEmptyState));
     }
 
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         fsm.Update();
-        pointText.text = "RP: " + rootPoints.ToString();
     }
 
-    
+    private void SetMaxLength()
+    {
+        maxLength = Mathf.Floor(rootPoints / pointsToRootLengthDivider);
+    }
+
     public GameObject PlaceRoot()
     {
         GameObject newRoot = Instantiate(rootPrefab);
@@ -77,13 +83,22 @@ public class RootCreator : MonoBehaviour
         newRoot.transform.rotation = Quaternion.LookRotation(delta);
         newRoot.transform.Rotate(-90, 0, 0);
         newRoot.transform.position = (p1 + p2) / 2f;
+        //dit zorgt ervoor dat de root zolang is als de distance tussen de muis en het groeipunt.
         Vector3 scale = newRoot.transform.localScale;
         scale.y = delta.magnitude / 2f;
         newRoot.transform.localScale = scale;
 
-        rootPoints -= rootPointCost;
-
         return newRoot;
+    }
+
+    public GameObject PlaceBuilding(float BuildingType, Vector3 mousePos)
+    {
+        GameObject newBuilding = Instantiate(Buildings[0]);
+
+        //offset toegevoegd omdat anders de building door de root heen spawned. dit zorgt voor problemen met de raycast.
+        newBuilding.transform.position = mousePos + new Vector3(0, 3, 0);
+//        print(mousePos);
+        return newBuilding;
     }
 
 }

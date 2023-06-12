@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class RootEmptyState : State<RootCreator>
 {
     protected FSM<RootCreator> owner;
+    static public bool SwitchState = false;
     LineRenderer lineRenderer;
     public RootEmptyState(FSM<RootCreator> _owner)
     {
@@ -16,24 +16,43 @@ public class RootEmptyState : State<RootCreator>
     public override void OnEnter()
     {
         owner.pOwner.lineRenderer.positionCount = 0;
+        Debug.Log("emptystate");
+        if (PlayerController.Instance == null)
+        {
+
+        }
+        else if (PlayerController.Instance.currency == 0)
+        {
+
+            owner.SwitchState(typeof(NoFunds));
+        }
     }
 
     public override void OnUpdate()
     {
+
         base.OnUpdate();
+
+        if (SwitchState == true)
+        {
+            owner.SwitchState(typeof(BuildDefenses));
+            SwitchState = false;
+        }
 
         if (!DayCycle.Instance.isNight)
         {
-            
             owner.SwitchState(typeof(RootFightState));
         }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
+
+        //op de roots zitten belzier curves die onder de rootspawnarea layermask vallen. bij deze raycast wordt gecheckts of de muis op die layer mask zit en zo ja dan kan je een
+        // root spawnen op dat oppervlak
         if (Physics.Raycast(ray, out hit, 100f, owner.pOwner.rootSpawnArea))
         {
-            //start placing root (line)
+            //"0" staat voor primairy mouse button, 1 is je secondairy en 2 is je middle mouse button
             if (Input.GetMouseButtonDown(0))
             {
                 lineRenderer.positionCount = 2;
@@ -44,6 +63,70 @@ public class RootEmptyState : State<RootCreator>
 
         }
     }
+    static public void ChangeState()
+    {
+        RootEmptyState.SwitchState = true;
+    }
+}
+
+public class BuildDefenses : State<RootCreator>
+{
+    protected FSM<RootCreator> owner;
+    static public bool SwitchState = false;
+
+    public override void OnEnter()
+    {
+        Debug.Log("builddefenses");
+    }
+    //dit is hetzelfde als een awake funciton.
+    public BuildDefenses(FSM<RootCreator> _owner)
+    {
+        owner = _owner;
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        //Debug.Log("were building defenses baby");
+        if (PlayerController.Instance.currency <= 0)
+        {
+            owner.SwitchState(typeof(NoFunds));
+        }
+
+        if (SwitchState)
+        {
+            owner.SwitchState(typeof(RootFightState));
+            SwitchState = false;
+        }
+
+        //maak een var die de positie van de mouse trackt.
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        //maak een raycasthit var die hit heet
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 100f, owner.pOwner.rootSpawnArea))
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                //als de player de muisknop indrukt,
+                //gaat er een bepaalde hoeveelheid punten van zn currency af
+                ///plaatst het script een building
+                /// wordt deze building aan de lijst toe
+                PlayerController.Instance.currency -= 1;
+                //geef bij 1 het nr in van het gebouw dat je gaat bouwen.
+                GameObject building = owner.pOwner.PlaceBuilding(1, hit.point);
+                owner.pOwner.buildingsList.Add(building);
+                //                Debug.Log("NU MAAK JE EEN GEBOUW DIE KAN DEFENDEN");
+            }
+        }
+    }
+
+    static public void ChangeState()
+    {
+        BuildDefenses.SwitchState = true;
+    }
+
 }
 
 public class RootEditState : State<RootCreator>
@@ -64,6 +147,12 @@ public class RootEditState : State<RootCreator>
         base.OnEnter();
     }
 
+    public override void OnExit()
+    {
+        base.OnExit();
+        PlayerController.Instance.currency -= 1;
+    }
+
     public override void OnUpdate()
     {
         base.OnUpdate();
@@ -71,9 +160,7 @@ public class RootEditState : State<RootCreator>
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
-
-        
-
+        //logic voor mouse input
         if (Physics.Raycast(ray, out hit, 100f, owner.pOwner.playingField))
         {
             Vector3 p1 = lineRenderer.GetPosition(0);
@@ -92,22 +179,18 @@ public class RootEditState : State<RootCreator>
                 lineRenderer.sharedMaterial = owner.pOwner.lineMaterials[1];
                 canPlace = false;
             }
-            if (Physics.Raycast(p1, dir, (p2-p1).magnitude, owner.pOwner.obstacle))
-            {
-                lineRenderer.sharedMaterial = owner.pOwner.lineMaterials[1];
-                canPlace = false;
-            }
-            if (owner.pOwner.rootPoints < owner.pOwner.rootPointCost)
+            if (Physics.Raycast(p1, dir, (p2 - p1).magnitude, owner.pOwner.obstacle))
             {
                 lineRenderer.sharedMaterial = owner.pOwner.lineMaterials[1];
                 canPlace = false;
             }
 
 
-            if ((p2 - p1).magnitude > owner.pOwner.maxLengthPerRoot)
+
+            if ((p2 - p1).magnitude > owner.pOwner.maxLength)
             {
 
-                Vector3 correctedPosition = p1 + (dir * owner.pOwner.maxLengthPerRoot);
+                Vector3 correctedPosition = p1 + (dir * owner.pOwner.maxLength);
                 correctedPosition.y = 0f;
 
                 lineRenderer.SetPosition(1, correctedPosition);
@@ -117,22 +200,19 @@ public class RootEditState : State<RootCreator>
 
                 lineRenderer.SetPosition(1, placePoint);
             }
-            
-            //finalize placing root
+
             if (Input.GetMouseButtonDown(0) && canPlace)
             {
                 GameObject root = owner.pOwner.PlaceRoot();
                 owner.pOwner.rootList.Add(root);
-                owner.SwitchState(typeof(RootEmptyState));
-                owner.pOwner.place_root.Play();
-
-
-            }
-
-            //cancel placing root
-            if (Input.GetMouseButtonDown(1))
-            {
-                owner.SwitchState(typeof(RootEmptyState));
+                if (Input.GetKey(KeyCode.LeftControl))
+                {
+                    lineRenderer.SetPosition(0, placePoint);
+                }
+                else
+                {
+                    owner.SwitchState(typeof(RootEmptyState));
+                }
             }
 
         }
@@ -143,41 +223,53 @@ public class RootEditState : State<RootCreator>
 public class RootFightState : State<RootCreator>
 {
     protected FSM<RootCreator> owner;
+    static public bool switchState = false;
     public RootFightState(FSM<RootCreator> _owner)
     {
         owner = _owner;
     }
-    
+
     public override void OnEnter()
     {
-        //day starts
-        Debug.Log("daytime has arrived");
-        owner.pOwner.bgMusic.SetParameter("day_night_switch", 1);
-        owner.pOwner.getting_day.Play();
-        owner.pOwner.night_amb.Stop();
-        owner.pOwner.day_amb.Play();
+        //Debug.Log("daytime has arrived");
     }
 
     public override void OnUpdate()
     {
+        if (Building1.instance != null)
+            Building1.instance.CheckForEnemies();
 
         if (DayCycle.Instance.isNight)
         {
-            Debug.Log("night comes");
-            
+            //Debug.Log("night comes");
             owner.SwitchState(typeof(RootEmptyState));
         }
 
-        
-    }
 
-    public override void OnExit()
+    }
+}
+
+public class NoFunds : State<RootCreator>
+{
+    protected FSM<RootCreator> owner;
+    static public bool switchState = false;
+    private float _fadeTime = 3;
+
+    public NoFunds(FSM<RootCreator> _owner)
     {
-        //day ends
-        owner.pOwner.rootPoints += owner.pOwner.rootPoints += owner.pOwner.rootPointIncreasePerRound;
-        owner.pOwner.bgMusic.SetParameter("day_night_switch", 0);
-        owner.pOwner.getting_night.Play();
-        owner.pOwner.night_amb.Play();
-        owner.pOwner.day_amb.Stop();
+        owner = _owner;
+    }
+    public override void OnEnter()
+    {
+        base.OnEnter();
+    }
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("no more funds");
+            PlayerController.Instance.NoFund();
+        }
     }
 }

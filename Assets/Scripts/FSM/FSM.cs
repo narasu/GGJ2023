@@ -24,6 +24,7 @@ public class FSM<T>
 
     public void Update()
     {
+        //de update functie binnen de states is een override functie die werkt als hij wordt aangeroepen.
         currentState?.OnUpdate();
     }
 

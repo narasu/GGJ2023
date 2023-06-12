@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
     public Animator DayCycle;
     public GameObject Menu;
     public GameObject EndTurnButton;
+    protected FSM<RootCreator> owner;
     public static bool IsPaused = false;
 
     void Awake() => Instance = this;
@@ -66,14 +67,18 @@ public class PauseMenu : MonoBehaviour
     {
         //set de light naar dag
         global::DayCycle.Instance.isNight = false;
-
         //EndTurnButton.SetActive(false);
         DayCycle.SetFloat("DayNightCycle", 1);
+        BuildDefenses.ChangeState();
     }
 
     public void StartNight()
     {
         global::DayCycle.Instance.isNight = true;
         //animatie om nacht te starten staat in waveSpawner.cs
+    }
+    public void StartBuilding()
+    {
+        RootEmptyState.ChangeState();
     }
 }

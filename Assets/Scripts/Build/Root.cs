@@ -17,7 +17,7 @@ public class Root : MonoBehaviour
         for(int i = 0; i < mats.Length; i++)
         {
             mats[i] = r[i].material;
-            Debug.Log(mats[i].GetFloat("_grow"));
+//            Debug.Log(mats[i].GetFloat("_grow"));
             mats[i].SetFloat("_grow", 0);
         }
     }
@@ -35,5 +35,13 @@ public class Root : MonoBehaviour
 
     public void SelectMesh(float _length)
     {
+    }
+
+    private void OnMouseEnter() {
+        print("muis hovert over een root");
+    }
+
+    private void OnMouseExit() {
+        print(" muis hovert niet meer over een root");
     }
 }

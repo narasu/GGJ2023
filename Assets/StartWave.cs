@@ -20,9 +20,9 @@ public class StartWave : MonoBehaviour
     }
 
     public void SoundEffect1(){
-        Audio2.Play();
+//        Audio2.Play();
     }
     public void SoundEffect2(){
-        Audio1.Play();
+   //     Audio1.Play();
     }
 }
