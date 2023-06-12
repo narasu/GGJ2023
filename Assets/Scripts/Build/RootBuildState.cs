@@ -19,11 +19,10 @@ public class RootEmptyState : State<RootCreator>
         Debug.Log("emptystate");
         if (PlayerController.Instance == null)
         {
-
+            //do nothing
         }
         else if (PlayerController.Instance.currency == 0)
         {
-
             owner.SwitchState(typeof(NoFunds));
         }
     }
@@ -93,10 +92,9 @@ public class BuildDefenses : State<RootCreator>
             owner.SwitchState(typeof(NoFunds));
         }
 
-        if (SwitchState)
+        if (!DayCycle.Instance.isNight)
         {
             owner.SwitchState(typeof(RootFightState));
-            SwitchState = false;
         }
 
         //maak een var die de positie van de mouse trackt.
@@ -105,19 +103,22 @@ public class BuildDefenses : State<RootCreator>
         //maak een raycasthit var die hit heet
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 100f, owner.pOwner.rootSpawnArea))
+        if (!Physics.Raycast(ray, out hit, 100f, owner.pOwner.Tower))
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Physics.Raycast(ray, out hit, 100f, owner.pOwner.rootSpawnArea))
             {
-                //als de player de muisknop indrukt,
-                //gaat er een bepaalde hoeveelheid punten van zn currency af
-                ///plaatst het script een building
-                /// wordt deze building aan de lijst toe
-                PlayerController.Instance.currency -= 1;
-                //geef bij 1 het nr in van het gebouw dat je gaat bouwen.
-                GameObject building = owner.pOwner.PlaceBuilding(1, hit.point);
-                owner.pOwner.buildingsList.Add(building);
-                //                Debug.Log("NU MAAK JE EEN GEBOUW DIE KAN DEFENDEN");
+                if (Input.GetMouseButtonDown(0))
+                {
+                    //als de player de muisknop indrukt,
+                    //gaat er een bepaalde hoeveelheid punten van zn currency af
+                    ///plaatst het script een building
+                    /// wordt deze building aan de lijst toe
+                    PlayerController.Instance.currency -= 1;
+                    //geef bij 1 het nr in van het gebouw dat je gaat bouwen.
+                    GameObject building = owner.pOwner.PlaceBuilding(1, hit.point);
+                    owner.pOwner.buildingsList.Add(building);
+                    //                Debug.Log("NU MAAK JE EEN GEBOUW DIE KAN DEFENDEN");
+                }
             }
         }
     }
@@ -229,15 +230,13 @@ public class RootFightState : State<RootCreator>
         owner = _owner;
     }
 
-    public override void OnEnter()
-    {
-        //Debug.Log("daytime has arrived");
-    }
-
     public override void OnUpdate()
     {
         if (Building1.instance != null)
-            Building1.instance.CheckForEnemies();
+        for (int i = 0; i < PauseMenu.Instance.towers.Count; i++)
+        {
+            PauseMenu.Instance.towers[i].gameObject.GetComponent<Buildings>().CheckForEnemies();
+        }
 
         if (DayCycle.Instance.isNight)
         {
@@ -252,8 +251,6 @@ public class RootFightState : State<RootCreator>
 public class NoFunds : State<RootCreator>
 {
     protected FSM<RootCreator> owner;
-    static public bool switchState = false;
-    private float _fadeTime = 3;
 
     public NoFunds(FSM<RootCreator> _owner)
     {
@@ -266,10 +263,20 @@ public class NoFunds : State<RootCreator>
     public override void OnUpdate()
     {
         base.OnUpdate();
-        if (Input.GetMouseButtonDown(0))
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        //maak een raycasthit var die hit heet
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 100f, owner.pOwner.playingField))
         {
-            Debug.Log("no more funds");
-            PlayerController.Instance.NoFund();
+            if (Input.GetMouseButtonDown(0))
+            {
+                PlayerController.Instance.NoFund();
+            }
+        }
+        if (!DayCycle.Instance.isNight)
+        {
+            owner.SwitchState(typeof(RootFightState));
         }
     }
 }

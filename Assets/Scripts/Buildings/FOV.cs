@@ -9,16 +9,17 @@ public class FOV : MonoBehaviour
     public float viewAngle;
     public float viewRadius;
     public LayerMask targetMask;
-    public LayerMask Root;
 
     public List<Transform> visibleTarget = new List<Transform>();
-    public List<Transform> targetsToLookat = new List<Transform>();
     public bool addedTolist = false;
 
     private void Start()
     {
         instance = this;
         StartCoroutine("FindTargetsWithDelay", .2f);
+    }
+    private void Update() {
+
     }
 
     IEnumerator FindTargetsWithDelay(float delay)
@@ -43,7 +44,6 @@ public class FOV : MonoBehaviour
             {
                 float dstToTarget = Vector3.Distance(transform.position, Target.position);
                 if(!addedTolist){
-                    targetsToLookat.Add(Target);
                     addedTolist = true;
                 }
                 visibleTarget.Add(Target);
@@ -58,4 +58,6 @@ public class FOV : MonoBehaviour
         }
         return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
     }
+
+    
 }

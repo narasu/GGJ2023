@@ -17,6 +17,7 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.GetComponent<EnemyController>())
         {
             other.gameObject.GetComponent<EnemyHealth>().EnemyTakeDamge(Damage);
+            Destroy(this.gameObject);
         }
     }
     public IEnumerator SendHoming(Transform enemyTransform, float projectileSpeed)

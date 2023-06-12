@@ -8,8 +8,9 @@ public class PauseMenu : MonoBehaviour
     public static PauseMenu Instance;
     public Animator DayCycle;
     public GameObject Menu;
-    public GameObject EndTurnButton;
-    protected FSM<RootCreator> owner;
+    //rare plaats om dit te zetten maar ik kon niks beters bedenken
+    public List<GameObject> towers = new List<GameObject>();
+
     public static bool IsPaused = false;
 
     void Awake() => Instance = this;
@@ -69,7 +70,8 @@ public class PauseMenu : MonoBehaviour
         global::DayCycle.Instance.isNight = false;
         //EndTurnButton.SetActive(false);
         DayCycle.SetFloat("DayNightCycle", 1);
-        BuildDefenses.ChangeState();
+        //BuildDefenses.ChangeState();
+        //NoFunds.ChangeState();
     }
 
     public void StartNight()

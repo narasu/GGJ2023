@@ -40,18 +40,18 @@ public class waveSpawner : MonoBehaviour
         // print(CurrentWaveNumber);
         // print(wave[CurrentWaveNumber]);
 
-        CurrentWave = wave[CurrentWaveNumber]; //if currentwavenr is 0 wave 1 is active and so on
+        CurrentWave = wave[CurrentWaveNumber - 1]; //if currentwavenr is 0 wave 1 is active and so on
         spawnWave(); //spawn a wave
 
         GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Enemies");
         if (totalEnemies.Length == 0)
         {
-            if (CurrentWaveNumber + 1 != wave.Length)
+            if (CurrentWaveNumber != wave.Length)
             {
                 if (canAnimate)
                 {
                     PauseMenu.Instance.DayCycle.SetFloat("DayNightCycle", -1);
-                    waveName.text = wave[CurrentWaveNumber + 1].waveName;
+                    waveName.text = wave[CurrentWaveNumber].waveName;
                     Animator.SetTrigger("WaveComplete");
                     canAnimate = false;
                 }

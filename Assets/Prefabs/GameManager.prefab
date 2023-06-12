@@ -44,4 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b8acbd5e8c8424783c23170cc286fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DayCycle: {fileID: 0}
   Menu: {fileID: 0}
+  towers: []

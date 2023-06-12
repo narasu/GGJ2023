@@ -111,7 +111,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   life: 3
-  Enemy: {fileID: 1904146894196439968, guid: b50f1c77888751842b916d69312f9bdd, type: 3}
-  force: 100
-  projectileSpeed: 10000
-  Damage: 1000
+  Damage: 20

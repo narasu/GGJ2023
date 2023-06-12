@@ -13,7 +13,6 @@ public class EnemyHealth : MonoBehaviour
         currentEnemyHealth = MaxEnemyHealth; //make sure the current health is set to the max
         Instance = this;
 
-        StartCoroutine(DamagePerSecond());
     }
 
 
@@ -25,20 +24,9 @@ public class EnemyHealth : MonoBehaviour
         {
             //geef de player de punten die hij heeft verdient met deze kill
             PlayerController.Instance.currency += GetComponent<EnemyController>().enemyWorth;
-            FOV.instance.targetsToLookat.Clear();
             FOV.instance.addedTolist = false;
             Die();
         }
-    }
-
-    private IEnumerator DamagePerSecond()
-    {
-        while (currentEnemyHealth > 0)
-        {
-            EnemyTakeDamge(10);
-            yield return new WaitForSeconds(1.0f);
-        }
-        
     }
 
     void Die()

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3725863310322853565}
   - component: {fileID: 5713635395455680096}
   - component: {fileID: -3747096445301048484}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: VLIEGTUIG
   m_TagString: Enemies
   m_Icon: {fileID: 0}
