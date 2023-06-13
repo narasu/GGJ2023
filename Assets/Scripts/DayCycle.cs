@@ -1,25 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DayCycle : MonoBehaviour
 {
+    public static DayCycle Instance;
     [SerializeField] private Material _skybox;
     [SerializeField] private Light _directionalLighting;
     [SerializeField] private GameObject _spotLight;
+    [SerializeField] private FmodGameScene _backgroundMusic;
+    [SerializeField] private FmodAmbience _ambience;
     private float _timeScale = 2.5f, _fadeTiming = 2f;
     private float currentExposure { get; set; }
     private float _elapsedTime = 0f;
     private readonly int _rotation = Shader.PropertyToID("_Rotation");
     private readonly int _exposure = Shader.PropertyToID("_Exposure");
 
-    public static DayCycle Instance;
-    public bool isNight = true;
+    public bool isNight = false;
 
     private void Awake()
     {
         Instance = this;
-        
+        StartCoroutine(SwitchToNight());
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void Update()
@@ -32,6 +36,9 @@ public class DayCycle : MonoBehaviour
     //logic voor het dag en nacht switchen
     public IEnumerator SwitchToDay()
     {
+        //zet de fmod parameter zodat we de audio switchen naar nacht modus
+        _backgroundMusic._switch = 1;
+        //_ambience.Dag();
         _spotLight.SetActive(false);
         float localElapsedTime = 0f;
         while (localElapsedTime < _fadeTiming)
@@ -55,6 +62,8 @@ public class DayCycle : MonoBehaviour
     }
     public IEnumerator SwitchToNight()
     {
+        _backgroundMusic._switch = 0;
+       // _ambience.Nacht();
         float localElapsedTime = 0f;
         while (localElapsedTime < _fadeTiming)
         {
@@ -67,7 +76,6 @@ public class DayCycle : MonoBehaviour
         }
         yield return new WaitForSeconds(1);
         _spotLight.SetActive(true);
-
     }
 }
 

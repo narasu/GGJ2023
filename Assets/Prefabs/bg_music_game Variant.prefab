@@ -1,0 +1,132 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2768180375399906176
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2278030853055968024, guid: d7dfb0909f0dd1b44b957556a8341b86,
+        type: 3}
+      propertyPath: m_Name
+      value: bg_music_game
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278030853055968024, guid: d7dfb0909f0dd1b44b957556a8341b86,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278030853055968026, guid: d7dfb0909f0dd1b44b957556a8341b86,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278030853055968026, guid: d7dfb0909f0dd1b44b957556a8341b86,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -144.34178
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278030853055968026, guid: d7dfb0909f0dd1b44b957556a8341b86,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 87.124245
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278030853055968026, guid: d7dfb0909f0dd1b44b957556a8341b86,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -61.146164
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278030853055968026, guid: d7dfb0909f0dd1b44b957556a8341b86,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278030853055968026, guid: d7dfb0909f0dd1b44b957556a8341b86,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278030853055968026, guid: d7dfb0909f0dd1b44b957556a8341b86,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278030853055968026, guid: d7dfb0909f0dd1b44b957556a8341b86,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278030853055968026, guid: d7dfb0909f0dd1b44b957556a8341b86,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278030853055968026, guid: d7dfb0909f0dd1b44b957556a8341b86,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278030853055968026, guid: d7dfb0909f0dd1b44b957556a8341b86,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 0}
+  m_SourcePrefab: {fileID: 100100000, guid: d7dfb0909f0dd1b44b957556a8341b86, type: 3}
+--- !u!1 &4177015671251323032 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2278030853055968024, guid: d7dfb0909f0dd1b44b957556a8341b86,
+    type: 3}
+  m_PrefabInstance: {fileID: 2768180375399906176}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1249913745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4177015671251323032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daf2b30aec392824ba7dacfad57e8b50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundMusic:
+    Guid:
+      Data1: -1794145262
+      Data2: 1311432818
+      Data3: -396929654
+      Data4: 2105868372
+    Path: event:/music/BG_music_01
+  slider: {fileID: 0}
+  vol: 0
+  _switch: 0
+--- !u!114 &1249913746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4177015671251323032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1c6848e601250b49978ba7de788aec3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dag:
+    Guid:
+      Data1: 991354765
+      Data2: 1086564276
+      Data3: 1461409415
+      Data4: -393474875
+    Path: event:/ambainces/Ambaince_dag
+  nacht:
+    Guid:
+      Data1: 1582347371
+      Data2: 1124628248
+      Data3: 1538061975
+      Data4: 375012864
+    Path: event:/ambainces/Ambaince_nacht
+  slider: {fileID: 0}

@@ -144,6 +144,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{3cef3c24-1dfb-450d-9b44-56e31de382a1}">
+		<property name="volume">
+			<value>-19</value>
+		</property>
 		<property name="name">
 			<value>Audio 2</value>
 		</property>
@@ -178,6 +181,9 @@
 		<property name="timelockedOffset">
 			<value>12</value>
 		</property>
+		<relationship name="fadeInCurve">
+			<destination>{307a4fbc-433d-4e3a-ada3-8cfc1f4a2a8e}</destination>
+		</relationship>
 		<relationship name="fadeOutCurve">
 			<destination>{17934e0c-aa99-44a6-9bcb-c89beb3b5ac1}</destination>
 		</relationship>
@@ -201,7 +207,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{2d930cac-673e-4b49-838d-0e2682cffffb}">
 		<property name="volume">
-			<value>-11</value>
+			<value>-16.5</value>
 		</property>
 		<property name="name">
 			<value>Audio 3</value>
@@ -287,6 +293,14 @@
 		</relationship>
 		<relationship name="relatedModule">
 			<destination>{bb61b281-a3db-4583-8a48-554d7f9ff45f}</destination>
+		</relationship>
+	</object>
+	<object class="FadeCurve" id="{307a4fbc-433d-4e3a-ada3-8cfc1f4a2a8e}">
+		<relationship name="startPoint">
+			<destination>{62ee0a68-e509-44ee-a47d-6473053478f9}</destination>
+		</relationship>
+		<relationship name="endPoint">
+			<destination>{6c382935-2427-4095-b72f-8acfeeb8650a}</destination>
 		</relationship>
 	</object>
 	<object class="FadeCurve" id="{17934e0c-aa99-44a6-9bcb-c89beb3b5ac1}">
@@ -389,6 +403,25 @@
 		</property>
 		<property name="value">
 			<value>0</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{62ee0a68-e509-44ee-a47d-6473053478f9}">
+		<property name="position">
+			<value>0</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+		<property name="curveShape">
+			<value>-0.2547189</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{6c382935-2427-4095-b72f-8acfeeb8650a}">
+		<property name="position">
+			<value>2</value>
+		</property>
+		<property name="value">
+			<value>1</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{c46a3e2f-7b09-4f96-85b8-68ed63c57b47}">

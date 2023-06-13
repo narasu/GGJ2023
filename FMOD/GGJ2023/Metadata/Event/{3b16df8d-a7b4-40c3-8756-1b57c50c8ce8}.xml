@@ -127,6 +127,9 @@
 		<property name="timelockedOffset">
 			<value>8</value>
 		</property>
+		<relationship name="fadeInCurve">
+			<destination>{abf8f9dc-affb-4346-b7eb-02ddf53807ee}</destination>
+		</relationship>
 		<relationship name="fadeOutCurve">
 			<destination>{2bdc1807-7f19-4da1-a4c4-afb5d123dabd}</destination>
 		</relationship>
@@ -135,6 +138,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{009f7aca-2fbd-47a9-9ef8-465adea7cbd1}">
+		<property name="volume">
+			<value>-15.5</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -173,6 +179,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{0617232a-d1b2-4ea7-9167-a70dcf0e0a94}">
+		<property name="volume">
+			<value>-15.5</value>
+		</property>
 		<property name="name">
 			<value>Audio 2</value>
 		</property>
@@ -216,6 +225,14 @@
 		</relationship>
 		<relationship name="relatedModule">
 			<destination>{785d36e0-65e5-427f-bf6d-898e0b941cd2}</destination>
+		</relationship>
+	</object>
+	<object class="FadeCurve" id="{abf8f9dc-affb-4346-b7eb-02ddf53807ee}">
+		<relationship name="startPoint">
+			<destination>{4abdaaa4-428c-434e-be00-0b1bba052292}</destination>
+		</relationship>
+		<relationship name="endPoint">
+			<destination>{7b84c536-4f5c-4677-80c1-7a2fe4d16cac}</destination>
 		</relationship>
 	</object>
 	<object class="FadeCurve" id="{2bdc1807-7f19-4da1-a4c4-afb5d123dabd}">
@@ -289,6 +306,25 @@
 	<object class="AutomationPoint" id="{458479ed-0da2-4fcc-a1b5-d430371f6612}">
 		<property name="position">
 			<value>108</value>
+		</property>
+		<property name="value">
+			<value>1</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{4abdaaa4-428c-434e-be00-0b1bba052292}">
+		<property name="position">
+			<value>0</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+		<property name="curveShape">
+			<value>-0.2547189</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{7b84c536-4f5c-4677-80c1-7a2fe4d16cac}">
+		<property name="position">
+			<value>2</value>
 		</property>
 		<property name="value">
 			<value>1</value>

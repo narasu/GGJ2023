@@ -7,7 +7,7 @@ public class PauseMenu : MonoBehaviour
 {
     public static PauseMenu Instance;
     public Animator DayCycle;
-    public GameObject Menu;
+    public GameObject Menu, Endturn, Building;
     //rare plaats om dit te zetten maar ik kon niks beters bedenken
     public List<GameObject> towers = new List<GameObject>();
 
@@ -42,6 +42,8 @@ public class PauseMenu : MonoBehaviour
     {
         //pause game
         Menu.SetActive(true);
+        Endturn.SetActive(false);
+        Building.SetActive(false);
         Time.timeScale = 0f;
         IsPaused = true;
     }
@@ -50,6 +52,8 @@ public class PauseMenu : MonoBehaviour
     {
         //resume game
         Menu.SetActive(false);
+        Endturn.SetActive(true);
+        Building.SetActive(true);
         Time.timeScale = 1f;
         IsPaused = false;
     }

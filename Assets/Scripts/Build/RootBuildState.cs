@@ -66,6 +66,11 @@ public class RootEmptyState : State<RootCreator>
     {
         RootEmptyState.SwitchState = true;
     }
+    private void OnDestroy()
+    {
+        lineRenderer = null;
+        owner = null;
+    }
 }
 
 public class BuildDefenses : State<RootCreator>
@@ -126,6 +131,10 @@ public class BuildDefenses : State<RootCreator>
     static public void ChangeState()
     {
         BuildDefenses.SwitchState = true;
+    }
+    private void OnDestroy()
+    {
+        owner = null;
     }
 
 }
@@ -219,6 +228,11 @@ public class RootEditState : State<RootCreator>
         }
 
     }
+    private void OnDestroy()
+    {
+        lineRenderer = null;
+        owner = null;
+    }
 }
 
 public class RootFightState : State<RootCreator>
@@ -233,10 +247,10 @@ public class RootFightState : State<RootCreator>
     public override void OnUpdate()
     {
         if (Building1.instance != null)
-        for (int i = 0; i < PauseMenu.Instance.towers.Count; i++)
-        {
-            PauseMenu.Instance.towers[i].gameObject.GetComponent<Buildings>().CheckForEnemies();
-        }
+            for (int i = 0; i < PauseMenu.Instance.towers.Count; i++)
+            {
+                PauseMenu.Instance.towers[i].gameObject.GetComponent<Buildings>().CheckForEnemies();
+            }
 
         if (DayCycle.Instance.isNight)
         {
@@ -245,6 +259,10 @@ public class RootFightState : State<RootCreator>
         }
 
 
+    }
+    private void OnDestroy()
+    {
+        owner = null;
     }
 }
 
@@ -278,5 +296,9 @@ public class NoFunds : State<RootCreator>
         {
             owner.SwitchState(typeof(RootFightState));
         }
+    }
+    private void OnDestroy()
+    {
+        owner = null;
     }
 }
