@@ -68,6 +68,7 @@ public class PauseMenu : MonoBehaviour
     {
         //set de light naar dag
         global::DayCycle.Instance.isNight = false;
+        StartCoroutine(global::DayCycle.Instance.SwitchToDay());
         //EndTurnButton.SetActive(false);
         DayCycle.SetFloat("DayNightCycle", 1);
         //BuildDefenses.ChangeState();
@@ -77,6 +78,7 @@ public class PauseMenu : MonoBehaviour
     public void StartNight()
     {
         global::DayCycle.Instance.isNight = true;
+        StartCoroutine(global::DayCycle.Instance.SwitchToNight());
         //animatie om nacht te starten staat in waveSpawner.cs
     }
     public void StartBuilding()
