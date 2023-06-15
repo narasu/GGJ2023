@@ -29,9 +29,12 @@ public class Bullet : MonoBehaviour
                 Destroy(gameObject);
                 break;
             }
-            transform.position += (enemyTransform.position - transform.position).normalized * projectileSpeed * Time.deltaTime;
-            transform.LookAt(enemyTransform.transform);
-            yield return null;
+            else
+            {
+                transform.position += (enemyTransform.position - transform.position).normalized * projectileSpeed * Time.deltaTime;
+                transform.LookAt(enemyTransform.transform);
+                yield return null;
+            }
         }
     }
 }

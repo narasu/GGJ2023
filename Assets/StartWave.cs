@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class StartWave : MonoBehaviour
 {
-    public AudioSource Audio1;
-    public AudioSource Audio2;
+    public AudioClip Audio1;
+    public AudioClip Audio2;
+    public AudioSource PlayAudio;
+    //public FMOD.Studio.EventInstance fmodInstance;
+    
+
     public void Spawn()
     {
         //wordt gereferenced in de animator
@@ -20,9 +24,11 @@ public class StartWave : MonoBehaviour
     }
 
     public void SoundEffect1(){
-//        Audio2.Play();
+        PlayAudio.clip = Audio1;
+        PlayAudio.Play();
     }
     public void SoundEffect2(){
-   //     Audio1.Play();
+        PlayAudio.clip = Audio2;
+        PlayAudio.Play();
     }
 }

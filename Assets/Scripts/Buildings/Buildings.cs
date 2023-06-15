@@ -42,7 +42,7 @@ public class Buildings : MonoBehaviour
 
     public void CheckForEnemies()
     {
-        print("we're checking" + gameObject.transform.position);
+//        print("we're checking" + gameObject.transform.position);
         //check of er enemies in de lijst zitten om een error te voorkomen
         if (fov.visibleTarget.Count != 0)
         {

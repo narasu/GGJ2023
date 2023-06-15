@@ -214,6 +214,7 @@ public class RootEditState : State<RootCreator>
             if (Input.GetMouseButtonDown(0) && canPlace)
             {
                 GameObject root = owner.pOwner.PlaceRoot();
+                root.GetComponent<Root>().StartRoot();
                 owner.pOwner.rootList.Add(root);
                 if (Input.GetKey(KeyCode.LeftControl))
                 {

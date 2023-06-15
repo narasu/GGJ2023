@@ -62,9 +62,6 @@ public class waveSpawner : MonoBehaviour
                 Animator.SetBool("Win", true);
             }
         }
-        if (totalEnemies.Length == 0)
-        {
-        }
     }
 
     public void spawnNextWave()

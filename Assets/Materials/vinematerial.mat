@@ -38,7 +38,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _alphaclip: 0.98
-    - _grow: 1.0001867
+    - _grow: 1
     - _metallic: 0
     - _scale: 0
     - _smoothness: 0

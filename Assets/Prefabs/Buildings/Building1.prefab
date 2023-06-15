@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6090248442597321171}
   - component: {fileID: -4368974643544315604}
   - component: {fileID: 8793139369490651553}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Building1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ MonoBehaviour:
   viewRadius: 35.19
   targetMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 2048
   visibleTarget: []
   addedTolist: 0
 --- !u!54 &-4368974643544315604
@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 4064390551716830376}
   - component: {fileID: 7333119395676409437}
   - component: {fileID: 7376796506013862249}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
