@@ -7,8 +7,11 @@ public class StartWave : MonoBehaviour
     public AudioClip Audio1;
     public AudioClip Audio2;
     public AudioSource PlayAudio;
-    //public FMOD.Studio.EventInstance fmodInstance;
-    
+    public FMODUnity.EventReference dag;
+    public FMODUnity.EventReference nacht;
+
+    private FMOD.Studio.EventInstance _fmodInstance;
+
 
     public void Spawn()
     {
@@ -21,14 +24,20 @@ public class StartWave : MonoBehaviour
         //start daycycle in anim
         DayCycle.Instance.isNight = true;
         PauseMenu.Instance.StartNight();
+        SoundEffect2();
     }
 
-    public void SoundEffect1(){
-        PlayAudio.clip = Audio1;
-        PlayAudio.Play();
+    public void SoundEffect1()
+    {
+        _fmodInstance = FMODUnity.RuntimeManager.CreateInstance(dag);
+        _fmodInstance.start();
+        _fmodInstance.release();
+
     }
-    public void SoundEffect2(){
-        PlayAudio.clip = Audio2;
-        PlayAudio.Play();
+    public void SoundEffect2()
+    {
+        _fmodInstance = FMODUnity.RuntimeManager.CreateInstance(nacht);
+        _fmodInstance.start();
+        _fmodInstance.release();
     }
 }

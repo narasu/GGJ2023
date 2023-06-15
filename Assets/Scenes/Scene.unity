@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.011463208, g: 0.020991618, b: 0.020841211, a: 1}
+  m_IndirectSpecularColor: {r: 0.18595433, g: 0.3408991, b: 0.33858064, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1004,32 +1004,32 @@ PrefabInstance:
     - target: {fileID: 3528124679786035430, guid: bf9390429987caa4ba6201bc566c8260,
         type: 3}
       propertyPath: wave.Array.data[0].NrOfEnemies
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3528124679786035430, guid: bf9390429987caa4ba6201bc566c8260,
-        type: 3}
-      propertyPath: wave.Array.data[1].NrOfEnemies
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3528124679786035430, guid: bf9390429987caa4ba6201bc566c8260,
-        type: 3}
-      propertyPath: wave.Array.data[2].NrOfEnemies
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3528124679786035430, guid: bf9390429987caa4ba6201bc566c8260,
-        type: 3}
-      propertyPath: wave.Array.data[0].spawnInterval
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3528124679786035430, guid: bf9390429987caa4ba6201bc566c8260,
-        type: 3}
-      propertyPath: wave.Array.data[1].spawnInterval
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3528124679786035430, guid: bf9390429987caa4ba6201bc566c8260,
         type: 3}
+      propertyPath: wave.Array.data[1].NrOfEnemies
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3528124679786035430, guid: bf9390429987caa4ba6201bc566c8260,
+        type: 3}
+      propertyPath: wave.Array.data[2].NrOfEnemies
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3528124679786035430, guid: bf9390429987caa4ba6201bc566c8260,
+        type: 3}
+      propertyPath: wave.Array.data[0].spawnInterval
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3528124679786035430, guid: bf9390429987caa4ba6201bc566c8260,
+        type: 3}
+      propertyPath: wave.Array.data[1].spawnInterval
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3528124679786035430, guid: bf9390429987caa4ba6201bc566c8260,
+        type: 3}
       propertyPath: wave.Array.data[2].spawnInterval
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3528124679786035430, guid: bf9390429987caa4ba6201bc566c8260,
         type: 3}
@@ -2116,10 +2116,60 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 64a6093bc6103a0429d63803e456953c, type: 3}
     - target: {fileID: 137984365770251385, guid: 3dd597a2fa9fe0043b6811d5bd702ea9,
         type: 3}
+      propertyPath: dag.Path
+      value: event:/overig/day_night_switch_sounds/getting_day
+      objectReference: {fileID: 0}
+    - target: {fileID: 137984365770251385, guid: 3dd597a2fa9fe0043b6811d5bd702ea9,
+        type: 3}
       propertyPath: PlayAudio
       value: 
       objectReference: {fileID: 4346126939985196022, guid: 2d90e301003f87a46ae1d6696312bd7c,
         type: 3}
+    - target: {fileID: 137984365770251385, guid: 3dd597a2fa9fe0043b6811d5bd702ea9,
+        type: 3}
+      propertyPath: nacht.Path
+      value: event:/overig/day_night_switch_sounds/getting_night
+      objectReference: {fileID: 0}
+    - target: {fileID: 137984365770251385, guid: 3dd597a2fa9fe0043b6811d5bd702ea9,
+        type: 3}
+      propertyPath: dag.Guid.Data1
+      value: 2097461958
+      objectReference: {fileID: 0}
+    - target: {fileID: 137984365770251385, guid: 3dd597a2fa9fe0043b6811d5bd702ea9,
+        type: 3}
+      propertyPath: dag.Guid.Data2
+      value: 1213321002
+      objectReference: {fileID: 0}
+    - target: {fileID: 137984365770251385, guid: 3dd597a2fa9fe0043b6811d5bd702ea9,
+        type: 3}
+      propertyPath: dag.Guid.Data3
+      value: -1796431436
+      objectReference: {fileID: 0}
+    - target: {fileID: 137984365770251385, guid: 3dd597a2fa9fe0043b6811d5bd702ea9,
+        type: 3}
+      propertyPath: dag.Guid.Data4
+      value: 773160429
+      objectReference: {fileID: 0}
+    - target: {fileID: 137984365770251385, guid: 3dd597a2fa9fe0043b6811d5bd702ea9,
+        type: 3}
+      propertyPath: nacht.Guid.Data1
+      value: -637124007
+      objectReference: {fileID: 0}
+    - target: {fileID: 137984365770251385, guid: 3dd597a2fa9fe0043b6811d5bd702ea9,
+        type: 3}
+      propertyPath: nacht.Guid.Data2
+      value: 1137597721
+      objectReference: {fileID: 0}
+    - target: {fileID: 137984365770251385, guid: 3dd597a2fa9fe0043b6811d5bd702ea9,
+        type: 3}
+      propertyPath: nacht.Guid.Data3
+      value: 1957076629
+      objectReference: {fileID: 0}
+    - target: {fileID: 137984365770251385, guid: 3dd597a2fa9fe0043b6811d5bd702ea9,
+        type: 3}
+      propertyPath: nacht.Guid.Data4
+      value: 59913099
+      objectReference: {fileID: 0}
     - target: {fileID: 137984366106325765, guid: 3dd597a2fa9fe0043b6811d5bd702ea9,
         type: 3}
       propertyPath: m_AnchorMax.x
